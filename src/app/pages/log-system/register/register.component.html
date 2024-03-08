@@ -1,0 +1,87 @@
+<form class="mt-3" [formGroup]="form">
+  <div>
+    <label for="name">Name *</label>
+    <input class="form-control" type="text" id="name" formControlName="name">
+    <div *ngIf="isValidAndTouched('name')" class="bg-warning rounded p-2 mt-1">
+      <p class="m-0" *ngIf="form.get('name')?.hasError('minlength')">{{minNumberMessage}}</p>
+      <p class="m-0" *ngIf="form.get('name')?.hasError('maxlength')">{{maxNumberMessage}}</p>
+      <p class="m-0" *ngIf="!form.get('name')?.hasError('maxlength')&&!form.get('name')?.hasError('minlength')">{{emptyMessage}}</p>
+    </div>
+  </div>
+
+  <div>
+    <label for="surname">Surname *</label>
+    <input class="form-control" type="text" id="surname" formControlName="surname">
+    <div *ngIf="isValidAndTouched('surname')" class="bg-warning rounded p-2 mt-1">
+      <p class="m-0" *ngIf="form.get('surname')?.hasError('minlength')">{{minNumberMessage}}</p>
+      <p class="m-0" *ngIf="form.get('surname')?.hasError('maxlength')">{{maxNumberMessage}}</p>
+      <p class="m-0" *ngIf="!form.get('surname')?.hasError('maxlength')&&!form.get('surname')?.hasError('minlength')">{{emptyMessage}}</p>
+    </div>
+  </div>
+
+  <div>
+    <label for="username">Username *</label>
+    <input class="form-control" type="text" id="username" formControlName="username">
+    <div *ngIf="isValidAndTouched('username')&&!checking" class="bg-warning rounded p-2 mt-1">
+      <p class="m-0" *ngIf="getCustomMessage('username')!=null">{{getCustomMessage("username")}}</p>
+      <p class="m-0" *ngIf="form.get('username')?.hasError('minlength')">{{minNumberMessage}}</p>
+      <p class="m-0" *ngIf="form.get('username')?.hasError('maxlength')">{{maxNumberMessage}}</p>
+      <p class="m-0" *ngIf="getCustomMessage('username')==null&&!form.get('username')?.hasError('maxlength')&&!form.get('username')?.hasError('minlength')">{{emptyMessage}}</p>
+    </div>
+  </div>
+
+  <div>
+    <label for="email">Email *</label>
+    <input class="form-control" type="text" id="email" formControlName="email">
+    <div *ngIf="isValidAndTouched('email')&&!checking" class="bg-warning rounded p-2 mt-1">
+      <p class="m-0" *ngIf="getCustomMessage('email')!=null">{{getCustomMessage("email")}}</p>
+      <p class="m-0" *ngIf="form.get('email')?.hasError('email')">This isn't an email!</p>
+      <p class="m-0" *ngIf="getCustomMessage('email')==null&&!form.get('email')?.hasError('email')">{{emptyMessage}}</p>
+    </div>
+  </div>
+
+  <div>
+    <label for="birthday">Birthday</label>
+    <input class="form-control" type="date" id="birthday" formControlName="birthday">
+  </div>
+
+  <div>
+    <label for="password">Password *</label>
+    <div class="password-div">
+      <input class="form-control" id="password" [type]="input1" formControlName="password">
+      <button type="button" class="eyes" *ngIf="!eye1" (click)="switch1();eye1=!eye1"><i class="bi bi-eye-fill"></i></button>
+      <button type="button" class="eyes" *ngIf="eye1" (click)="switch1();eye1=!eye1"><i class="bi bi-eye-slash-fill"></i></button>
+      <div *ngIf="isValidAndTouched('password')" class="bg-warning rounded p-2 mt-1">
+        <div *ngIf="form.get('password')?.hasError('pattern')">
+          Password must contain:
+          <ul>
+            <li>1 letter uppercase</li>
+            <li>1 letter lowercase</li>
+            <li>1 number</li>
+            <li>1 special character</li>
+            <li>Min 8 char</li>
+          </ul>
+        </div>
+        <p class="m-0" *ngIf="!form.get('password')?.hasError('pattern')">{{emptyMessage}}</p>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <label for="confirm-password">Confirm Password *</label>
+    <div class="password-div">
+      <input class="form-control" id="confirm-password" [type]="input2" formControlName="confirmPassword">
+      <button type="button" class="eyes" *ngIf="!eye2" (click)="switch2();eye2=!eye2"><i class="bi bi-eye-fill"></i></button>
+      <button type="button" class="eyes" *ngIf="eye2" (click)="switch2();eye2=!eye2"><i class="bi bi-eye-slash-fill"></i></button>
+      <div *ngIf="isValidAndTouched('confirmPassword')" class="bg-warning rounded p-2 mt-1">
+        <p class="m-0" *ngIf="getCustomMessage('confirmPassword')!=null">{{getCustomMessage('confirmPassword')}}</p>
+        <p class="m-0" *ngIf="getCustomMessage('confirmPassword')==null">{{emptyMessage}}</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-between align-items-center mt-3">
+    <p>You're signed? <a routerLink="/logSystem/login">Login</a></p>
+    <button id="submit" class="btn btn-primary" (click)="submit()" [disabled]="!form.valid||loading">Register</button>
+  </div>
+</form>

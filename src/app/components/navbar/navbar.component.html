@@ -1,0 +1,19 @@
+<nav id="navbar-mobile" class="navbar bg-body-tertiary pb-0">
+  <div class="w-100">
+    <div id="logo-block" class="text-center mb-2">
+      <a id="logo" class="navbar-brand w-25" routerLink="/home">LOGO-OMG</a>
+    </div>
+    <div id="links" class="text-center d-flex">
+      <a id="home" class="link w-50" routerLink="/home">Home</a>
+      <a class="link w-50" routerLink="">Qualcosa</a>
+    </div>
+    <form class="mt-1 mx-4">
+      <input class="form-control m-0" type="search" placeholder="Search" aria-label="Search">
+      <button class="d-none" type="submit"><i class="bi bi-search"></i></button>
+    </form>
+  </div>
+  <div id="login-ball" *ngIf="!logSystem" class="rounded-circle bg-primary text-white">
+    <a class="nav-link" *ngIf="!logged" routerLink="/logSystem/login"><i class="bi bi-person"></i></a>
+    <a *ngIf="logged"><i class="bi bi-person-fill"></i></a>
+  </div>
+</nav>
