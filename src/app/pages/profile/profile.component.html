@@ -1,0 +1,8 @@
+<app-no-edit *ngIf="!editMode" [user]="user"></app-no-edit>
+
+<app-edit *ngIf="editMode"></app-edit>
+
+<div *ngIf="!editMode" class="d-flex mx-4 mt-5">
+  <button id="delete" (click)="startDelete()" class="text-danger me-3">Delete</button>
+  <button id="edit" (click)="editMode=true" class="text-warning">Edit</button>
+</div>

@@ -24,3 +24,10 @@ div{
   font-size: 1.5em;
   z-index: 2;
 }
+.dropdown-toggle::after {
+  display: none;
+}
+#dropdown{
+  transform-origin: right top;
+  transform: translateX(-75%);
+}

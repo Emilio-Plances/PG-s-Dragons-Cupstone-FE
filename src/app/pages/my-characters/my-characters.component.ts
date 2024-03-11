@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { LogService } from '../log-system/service/log.service';
-import { IUser } from '../log-system/interfaces/iuser';
+import { IUser } from '../../interfaces/iuser';
 
 @Component({
   selector: 'app-my-characters',

@@ -25,7 +25,7 @@ export class RegisterComponent {
 
   constructor(
     private fb:FormBuilder,
-    private LS:LogService,
+    private ls:LogService,
     private router:Router
   ){}
   ngOnInit(){
@@ -50,7 +50,7 @@ export class RegisterComponent {
   }
   emailCheckValidator=(formC:FormControl):ValidationErrors|null=>{
     this.checking=true;
-    return this.LS.checkEmail(formC.value).pipe(map(response => {
+    return this.ls.checkEmail(formC.value).pipe(map(response => {
       this.checking=false;
       if (response.message == "Exist") {
         return {
@@ -63,7 +63,7 @@ export class RegisterComponent {
   )}
   usernameCheckValidator=(formC:FormControl):ValidationErrors|null=>{
     this.checking=true;
-    return this.LS.checkUsername(formC.value).pipe(map(response => {
+    return this.ls.checkUsername(formC.value).pipe(map(response => {
       this.checking=false;
       if (response.message == "Exist") {
         return {
@@ -91,7 +91,7 @@ export class RegisterComponent {
   isTouched(nameForm:string):boolean|undefined{
     return this.form.get(nameForm)?.touched
   }
-  isValidAndTouched(nameForm:string):boolean|undefined{
+  isNotValidAndTouched(nameForm:string):boolean|undefined{
     return !this.isValid(nameForm) && this.isTouched(nameForm)
   }
   submit():void{
@@ -100,7 +100,7 @@ export class RegisterComponent {
     this.form.value.name= this.form.value.name.charAt(0).toUpperCase()+this.form.value.name.slice(1).toLowerCase();
     this.form.value.surame= this.form.value.surname.charAt(0).toUpperCase()+this.form.value.surname.slice(1).toLowerCase();
     this.form.value.email=this.form.value.email.toLowerCase();
-    this.LS.register(this.form.value)
+    this.ls.register(this.form.value)
     .subscribe(()=>{
       this.loading=false;
       this.router.navigate(['/logSystem/login']);

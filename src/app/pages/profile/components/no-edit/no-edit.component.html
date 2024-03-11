@@ -1,0 +1,12 @@
+<div class="text-center mt-3">
+  <img id="profile-photo" class="" [src]="photo" alt="Profile Photo" />
+  <div id="username">{{ user?.username }}</div>
+</div>
+
+<div class="m-4">
+  <p><span>Name:</span> {{ user?.name }}</p>
+  <p><span>Surname:</span> {{ user?.surname }}</p>
+  <p><span>Birthday:</span> {{ user?.birthday }}</p>
+  <p><span>Email:</span> {{ user?.email }}</p>
+  <p><span>Info:</span> {{user?.info ? user?.info: "No info"}}</p>
+</div>

@@ -3,5 +3,6 @@ export interface IRegister {
   surname:string
   email:string,
   username:string,
+  birthday:Date,
   password:string,
 }

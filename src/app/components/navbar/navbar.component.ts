@@ -26,4 +26,8 @@ export class NavbarComponent {
   private updateLogSystemFlag(url: string): void {
     this.logSystem = url.includes("logSystem");
   }
+  logout(){
+    this.ls.logout();
+    location.reload();
+  }
 }

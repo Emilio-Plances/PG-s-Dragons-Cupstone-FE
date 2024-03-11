@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ILogin } from '../interfaces/ilogin';
+import { ILogin } from '../../../interfaces/ilogin';
 import { LogService } from '../service/log.service';
 import { catchError, map } from 'rxjs';
 
@@ -27,7 +27,7 @@ export class LoginComponent {
   constructor(
     private fb:FormBuilder,
     private router:Router,
-    private LS:LogService
+    private ls:LogService
   ){}
 
   ngOnInit(){
@@ -50,15 +50,12 @@ export class LoginComponent {
     else this.loginData.username=this.form.value.usernameEmail;
     this.loginData.password=this.form.value.password;
 
-    this.LS.login(this.loginData)
+    this.ls.login(this.loginData)
     .pipe(map(()=>this.loading=false),
     catchError(error=>{
       this.loading=false;
-      console.log(error.error.errorMessage)
       switch(error.error.errorMessage){
         case "User not found":
-          this.notFound=true;
-          break;
         case "Wrong username/password" :
           this.notFound=true;
           break;
