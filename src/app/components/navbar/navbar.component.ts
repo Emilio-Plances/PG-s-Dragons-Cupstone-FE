@@ -28,6 +28,5 @@ export class NavbarComponent {
   }
   logout(){
     this.ls.logout();
-    location.reload();
   }
 }

@@ -2,6 +2,7 @@ import { Component, Inject } from '@angular/core';
 import { IUser } from '../../interfaces/iuser';
 import { LogService } from '../log-system/service/log.service';
 import { Router } from '@angular/router';
+import { IUserAuth } from '../../interfaces/iuser-auth';
 
 @Component({
   selector: 'app-profile',
@@ -15,6 +16,7 @@ export class ProfileComponent {
   deleting!:boolean;
   deletingName!:String;
   editMode:boolean=false;
+  auth!:IUserAuth|null
 
   constructor(
     private ls:LogService,
@@ -23,7 +25,10 @@ export class ProfileComponent {
   ){}
   ngOnInit():void{
     this.ls.isLogged$.subscribe(logged=>this.logged= logged)
-    this.ls.user$.subscribe(user=>{this.user=user?.user} )
+    this.ls.user$.subscribe(auth=>{
+      this.user=auth?.user;
+      this.auth=auth;
+    } )
   }
 
   startDelete(){

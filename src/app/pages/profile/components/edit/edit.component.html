@@ -1,1 +1,35 @@
-<p>edit works!</p>
+<form [formGroup]="form" class="text-right">
+  <div class="text-center mt-3">
+    <label for="image"><img id="profile-photo" [src]="user?.linkPhoto? user?.linkPhoto:'../../../assets/images/user-missing.png'"></label>
+    <input class="form-control d-none" id="image" type="file" name="profile_photo" placeholder="Photo" formControlName="photo" capture (change)="onFileSelected($event)">
+  </div>
+  <div id="username" class="mt-2">
+    <input class="form-control text-center" type="text" formControlName="username"
+    [ngClass]="{'is-invalid': isNotValidAndTouched('username')}" tabindex="1">
+  </div>
+  <div class="d-flex align-items-center mt-3">
+    <label class="me-2" for="name">Name:</label>
+    <input class="form-control" type="text" formControlName="name"
+    [ngClass]="{'is-invalid': isNotValidAndTouched('name')}" tabindex="2">
+  </div>
+  <div class="d-flex align-items-center mt-3">
+    <label class="me-2" for="name">Surname:</label>
+    <input class="form-control" type="text" formControlName="surname"
+    [ngClass]="{'is-invalid': isNotValidAndTouched('surname')}" tabindex="3">
+  </div>
+  <div class="d-flex align-items-center mt-3">
+    <label class="me-2" for="birthday">Birthday:</label>
+    <input class="form-control" type="date" formControlName="birthday" tabindex="4">
+  </div>
+  <div class="d-flex align-items-center mt-3">
+    <label class="me-2" for="name">Email:</label>
+    <input class="form-control" type="text" formControlName="email"
+    [ngClass]="{'is-invalid': isNotValidAndTouched('email')}" tabindex="5">
+  </div>
+  <div class="mt-3">
+    <label class="me-2" for="info">Info:</label>
+    <textarea class="form-control" id="info" name="info" rows="4" cols="50" tabindex="6">
+    </textarea>
+  </div>
+  <button id="confirm" (click)="save()" class="bg-success text-white" [disabled]="!form.valid||loading"><i class="bi bi-check-lg"></i></button>
+</form>

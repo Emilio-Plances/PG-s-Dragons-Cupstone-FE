@@ -1,4 +1,10 @@
 import { Component, Input } from '@angular/core';
+import { IUser } from '../../../../interfaces/iuser';
+import { FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { LogService } from '../../../log-system/service/log.service';
+import { catchError, map, tap } from 'rxjs';
+import { IUserAuth } from '../../../../interfaces/iuser-auth';
 
 @Component({
   selector: 'app-edit',
@@ -6,5 +12,116 @@ import { Component, Input } from '@angular/core';
   styleUrl: './edit.component.scss'
 })
 export class EditComponent {
+  @Input() user!:IUser|undefined
+  @Input() auth!:IUserAuth|null
+  form!:FormGroup
+  loading:boolean=false;
+  checking:boolean=false;
+  file!:File
+  constructor(
+    private fb:FormBuilder,
+    private ls:LogService,
+    private router:Router
+  ){}
+  ngOnInit():void{
+    this.form=this.fb.group({
+      photo:[null],
+      name:[this.user?.name,[Validators.required, Validators.minLength(3),Validators.maxLength(15)]],
+      surname:[this.user?.surname,[Validators.required, Validators.minLength(3),Validators.maxLength(15)]],
+      username:[this.user?.username,[Validators.required, Validators.minLength(3),Validators.maxLength(15)],[this.usernameCheckValidator]],
+      birthday:[this.user?.birthday],
+      email:[this.user?.email,[Validators.required,Validators.email],[this.emailCheckValidator]],
+      info:[this.user?.info]
+    })
+  }
+  onFileSelected(event: any) {
+    this.file = event.target.files[0];
+  }
+  uploadFile() {
+
+  }
+  emailCheckValidator=(formC:FormControl):ValidationErrors|null=>{
+    this.checking=true;
+    return this.ls.checkEmail(formC.value).pipe(map(response => {
+      this.checking=false;
+      if(this.user?.email==formC.value){
+        this.checking=false;
+        return null;
+      }
+      if (response.message == "Exist") {
+        return {
+          invalid: true,
+          message: "Email already exists"
+        };
+      }
+      return null;
+    })
+  )}
+  usernameCheckValidator=(formC:FormControl):ValidationErrors|null=>{
+    this.checking=true;
+
+    return this.ls.checkUsername(formC.value).pipe(map(response => {
+      this.checking=false;
+      if(this.user?.username==formC.value){
+        this.checking=false;
+        return null;
+      }
+      if (response.message == "Exist") {
+        return {
+          invalid: true,
+          message: "Username already exists"
+        };
+      }
+      return null;
+    })
+  )}
+  isValid(nameForm:string):boolean|undefined{
+    return this.form.get(nameForm)?.valid
+  }
+  isTouched(nameForm:string):boolean|undefined{
+    return this.form.get(nameForm)?.touched
+  }
+  isNotValidAndTouched(nameForm:string):boolean|undefined{
+    return !this.isValid(nameForm) && this.isTouched(nameForm)
+  }
+
+  save():void{
+    this.loading=true;
+    this.form.value.name= this.form.value.name.charAt(0).toUpperCase()+this.form.value.name.slice(1).toLowerCase();
+    this.form.value.surame= this.form.value.surname.charAt(0).toUpperCase()+this.form.value.surname.slice(1).toLowerCase();
+    this.form.value.email=this.form.value.email.toLowerCase();
+    if(!this.user) return;
+    this.user.name=this.form.value.name;
+    this.user.surname=this.form.value.surname;
+    this.user.email=this.form.value.email;
+    this.user.birthday=this.form.value.birthday;
+    this.user.username=this.form.value.username;
+    this.user.info=this.form.value.info;
+
+    if(this.file) {
+        this.uploadFile();
+        if(!this.user) return
+        this.ls.upload(this.user.id, this.file)
+        .pipe(
+        catchError(error=>{
+        console.log(`Error`);
+        throw error;
+      }))
+      .subscribe((data)=> {
+        if(!this.user)return
+        console.log("Success");
+        if(!data.response)return
+        this.user.linkPhoto=data.response.linkPhoto;
+
+        if(!this.auth) return;
+        this.auth.user=this.user;
+        this.ls.edit(this.auth).subscribe(()=>location.reload())
+      });
+    }else{
+      if(!this.auth) return;
+      this.auth.user=this.user;
+      this.ls.edit(this.auth).subscribe(()=>location.reload())
+    }
+  }
 
 }
