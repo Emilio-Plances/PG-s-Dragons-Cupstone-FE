@@ -1,0 +1,39 @@
+<div>
+
+  <div id="filter-button" ngbDropdown class="d-inline-block">
+    <button type="button" (click)="open=!open" class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>
+      <i *ngIf="!open" class="bi bi-funnel"></i>
+      <i *ngIf="open" class="bi bi-funnel-fill"></i>
+    </button>
+    <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+        <label class="form-check-label" for="flexCheckDefault">
+          Default checkbox
+        </label>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+  <div>
+    <h3>Characters</h3>
+    BLOCCO DEI CHARACTERS
+  </div>
+
+
+
+
+  <div>
+    <h3>Users</h3>
+    <div class="border border-primary" *ngFor="let user of users">
+      <app-userblock [user]="user"></app-userblock>
+    </div>
+  </div>
+</div>

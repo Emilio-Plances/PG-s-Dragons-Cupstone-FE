@@ -11,6 +11,7 @@ import { IUserAuth } from '../../interfaces/iuser-auth';
 })
 export class ProfileComponent {
   logged!:boolean;
+  userId!:number;
   user!:IUser|undefined;
   photo!:string;
   deleting!:boolean;
@@ -21,7 +22,7 @@ export class ProfileComponent {
   constructor(
     private ls:LogService,
     @Inject('Swal') private swal: any,
-    private router:Router
+
   ){}
   ngOnInit():void{
     this.ls.isLogged$.subscribe(logged=>this.logged= logged)
@@ -65,7 +66,7 @@ export class ProfileComponent {
         icon: "success",
         title: `Account deleted! See you next time ${this.user?.name}! We're sorry to see you're going!`,
         showConfirmButton: false,
-        timer: 3000
+        timer: 1500
       }).then(()=>{
         this.ls.logout()
       });

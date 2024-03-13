@@ -9,3 +9,8 @@
   top:-28px;
   font-size:1.3em
 }
+.form-control {
+  &:focus, &:focus-visible {
+    box-shadow: none;
+  }
+}

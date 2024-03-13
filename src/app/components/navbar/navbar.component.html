@@ -8,8 +8,8 @@
       <a class="link w-50" routerLink="/myCharacters">My Characters</a>
     </div>
     <form class="mt-1 mt-2 mb-0 mx-4">
-      <input class="form-control m-0" type="search" placeholder="Search" aria-label="Search">
-      <button class="d-none" type="submit"><i class="bi bi-search"></i></button>
+      <input class="form-control m-0" (input)="search()" type="search" placeholder="Search" aria-label="Search" [(ngModel)]="value" name="search">
+      <button class="d-none" type="submit" (click)="search()"><i class="bi bi-search"></i></button>
     </form>
   </div>
   <div id="login-ball" *ngIf="!logSystem" class="rounded-circle bg-primary text-white text-center">
@@ -22,5 +22,4 @@
       </div>
     </div>
   </div>
-
 </nav>

@@ -1,5 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { IUser } from '../../../../interfaces/iuser';
+import { ActivatedRoute } from '@angular/router';
+import { LogService } from '../../../log-system/service/log.service';
 
 @Component({
   selector: 'app-no-edit',
@@ -8,9 +10,20 @@ import { IUser } from '../../../../interfaces/iuser';
 })
 export class NoEditComponent {
   @Input() user!:IUser|undefined;
-  photo!:string;
 
+  constructor(
+    private route:ActivatedRoute,
+    private ls:LogService
+  ){}
   ngOnInit(){
-  this.photo=this.user?.linkPhoto? this.user?.linkPhoto:'../../../assets/images/user-missing.png';
+    this.route.paramMap.subscribe(params => {
+      let idString:string|null = params.get('id');
+      if (!idString) return;
+      let id:number=parseInt(idString);
+      this.ls.getById(id).subscribe(data=>{
+        if (!data.response) return
+        this.user=data.response
+      })
+    })
   }
 }

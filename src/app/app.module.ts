@@ -9,18 +9,22 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { LogService } from './pages/log-system/service/log.service';
 import { DefaultInterceptor } from './interceptors/default.interceptor';
+import { FormsModule } from '@angular/forms';
+import { Page404Component } from './components/page404/page404.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavbarComponent
+    NavbarComponent,
+    Page404Component
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     LogSystemModule,
-    NgbModule
+    NgbModule,
+    FormsModule
   ],
   providers: [
     LogService,

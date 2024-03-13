@@ -22,3 +22,8 @@ label{
   z-index: 3;
   border-radius: 50%;
 }
+.form-control {
+  &:focus, &:focus-visible {
+    box-shadow: none;
+  }
+}

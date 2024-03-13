@@ -4,12 +4,13 @@ import { Router } from "@angular/router";
 import { JwtHelperService } from "@auth0/angular-jwt";
 import { BehaviorSubject, map, Observable, tap } from "rxjs";
 import { environment } from "../../../../environments/environment.development";
-import { IDefaultResponse } from "../../../interfaces/idefaultresponse";
+import { ISingleResponse } from "../../../interfaces/isingleresponse";
 import { ILogin } from "../../../interfaces/ilogin";
 import { IPassword } from "../../../interfaces/ipassword";
 import { IRegister } from "../../../interfaces/iregister";
 import { IResponse } from "../../../interfaces/iresponse";
 import { IUserAuth } from "../../../interfaces/iuser-auth";
+import { IPageResponse } from "../../../interfaces/ipageresponse";
 
 @Injectable({
   providedIn: 'root'
@@ -27,6 +28,7 @@ export class LogService {
 
   jwt:JwtHelperService=new JwtHelperService();
 
+  pageSize:number=10
   constructor(
     private http:HttpClient,
     private router:Router
@@ -74,29 +76,32 @@ export class LogService {
 
   /*___________________USERS CALLS_______________________*/
 
-  getAll(): Observable<IDefaultResponse[]> {
-    return this.http.get<IDefaultResponse[]>(this.noLogUserURL);
+  getAll(): Observable<IPageResponse> {
+    return this.http.get<IPageResponse>(`${this.noLogUserURL}`);
   }
-  getById(id:number):Observable<IDefaultResponse> {
-    return this.http.get<IDefaultResponse>(`${this.noLogUserURL}/${id}`);
+  searching(publicUsername:String, pageNumber:number):Observable<IPageResponse>{
+    return this.http.get<IPageResponse>(`${this.noLogUserURL}/publicUsername?publicUsername=${publicUsername}&page=${pageNumber}&size=${this.pageSize}`);
   }
-  getByUsername(username:string):Observable<IDefaultResponse> {
-    return this.http.get<IDefaultResponse>(`${this.noLogUserURL}/param?username=${username}`);
+  getById(id:number):Observable<ISingleResponse> {
+    return this.http.get<ISingleResponse>(`${this.noLogUserURL}/${id}`);
   }
-  edit(auth:IUserAuth):Observable<IDefaultResponse> {
+  getByrealUsername(username:string,):Observable<ISingleResponse> {
+    return this.http.get<ISingleResponse>(`${this.noLogUserURL}/param?username=${username}`);
+  }
+  edit(auth:IUserAuth):Observable<ISingleResponse> {
     this.loggedUser.next(auth);
     localStorage.setItem(`login`,JSON.stringify(auth));
-    return this.http.patch<IDefaultResponse>(`${this.logUserURL}/${auth.user.id}`,auth.user)
+    return this.http.patch<ISingleResponse>(`${this.logUserURL}/${auth.user.id}`,auth.user)
   }
-  upload(id:number,file:File):Observable<IDefaultResponse>{
+  upload(id:number,file:File):Observable<ISingleResponse>{
     const formData = new FormData();
     formData.append('upload', file);
-    return this.http.patch<IDefaultResponse>(`${this.logUserURL}/${id}/upload`,formData);
+    return this.http.patch<ISingleResponse>(`${this.logUserURL}/${id}/upload`,formData);
   }
-  changePassword(id:number,passwords:IPassword):Observable<IDefaultResponse>{
-    return this.http.patch<IDefaultResponse>(`${this.logUserURL}/${id}/password`,passwords);
+  changePassword(id:number,passwords:IPassword):Observable<ISingleResponse>{
+    return this.http.patch<ISingleResponse>(`${this.logUserURL}/${id}/password`,passwords);
   }
-  deleteUser(id:number):Observable<IDefaultResponse>{
-    return this.http.delete<IDefaultResponse>(`${this.logUserURL}/${id}`);
+  deleteUser(id:number):Observable<ISingleResponse>{
+    return this.http.delete<ISingleResponse>(`${this.logUserURL}/${id}`);
   }
 }

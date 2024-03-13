@@ -8,3 +8,8 @@
   right: 10px;
   top:6px;
 }
+.form-control {
+  &:focus, &:focus-visible {
+    box-shadow: none;
+  }
+}

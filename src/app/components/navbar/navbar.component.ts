@@ -11,12 +11,12 @@ export class NavbarComponent {
   collapse:boolean=true;
   logged!:boolean;
   logSystem!:boolean;
+  value:string="";
 
   constructor(
     private ls:LogService,
     private router: Router
   ){this.logSystem=this.router.url.includes("logSystem");}
-
   ngOnInit():void{
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) this.updateLogSystemFlag(event.url);
@@ -28,5 +28,8 @@ export class NavbarComponent {
   }
   logout(){
     this.ls.logout();
+  }
+  search(){
+    if(this.value) this.router.navigate([`/search/${this.value}`]);
   }
 }

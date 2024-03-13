@@ -1,0 +1,9 @@
+<div [routerLink]="['/profile/noEdit/'+user.id]" class="row align-items-center p-2">
+
+  <img class="col-4" [src]="user.linkPhoto? user.linkPhoto:'../../../assets/images/user-missing.png'" alt="profile Photo">
+
+  <div class="col-8 text-right">
+    <p class="m-0">name:{{user.name}}</p>
+    <p class="m-0">username:{{user.publicUsername}}</p>
+  </div>
+</div>

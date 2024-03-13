@@ -3,9 +3,9 @@
     <label for="image"><img id="profile-photo" [src]="user?.linkPhoto? user?.linkPhoto:'../../../assets/images/user-missing.png'"></label>
     <input class="form-control d-none" id="image" type="file" name="profile_photo" placeholder="Photo" formControlName="photo" capture (change)="onFileSelected($event)">
   </div>
-  <div id="username" class="mt-2">
-    <input class="form-control text-center" type="text" formControlName="username"
-    [ngClass]="{'is-invalid': isNotValidAndTouched('username')}" tabindex="1">
+  <div id="public-username" class="mt-2">
+    <input class="form-control text-center" type="text" formControlName="publicUsername"
+    [ngClass]="{'is-invalid': isNotValidAndTouched('publicUsername')}" tabindex="1">
   </div>
   <div class="d-flex align-items-center mt-3">
     <label class="me-2" for="name">Name:</label>
@@ -28,8 +28,7 @@
   </div>
   <div class="mt-3">
     <label class="me-2" for="info">Info:</label>
-    <textarea class="form-control" id="info" name="info" rows="4" cols="50" tabindex="6">
-    </textarea>
+    <textarea class="form-control" id="info" name="info" rows="4" cols="50" tabindex="6" formControlName="info"></textarea>
   </div>
   <button id="confirm" (click)="save()" class="bg-success text-white" [disabled]="!form.valid||loading"><i class="bi bi-check-lg"></i></button>
 </form>

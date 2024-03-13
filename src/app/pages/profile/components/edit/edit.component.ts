@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Inject, Input } from '@angular/core';
 import { IUser } from '../../../../interfaces/iuser';
 import { FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -21,14 +21,14 @@ export class EditComponent {
   constructor(
     private fb:FormBuilder,
     private ls:LogService,
-    private router:Router
+    @Inject('Swal') private swal: any,
   ){}
   ngOnInit():void{
     this.form=this.fb.group({
       photo:[null],
       name:[this.user?.name,[Validators.required, Validators.minLength(3),Validators.maxLength(15)]],
       surname:[this.user?.surname,[Validators.required, Validators.minLength(3),Validators.maxLength(15)]],
-      username:[this.user?.username,[Validators.required, Validators.minLength(3),Validators.maxLength(15)],[this.usernameCheckValidator]],
+      publicUsername:[this.user?.publicUsername,[Validators.required, Validators.minLength(3),Validators.maxLength(15)]],
       birthday:[this.user?.birthday],
       email:[this.user?.email,[Validators.required,Validators.email],[this.emailCheckValidator]],
       info:[this.user?.info]
@@ -36,9 +36,6 @@ export class EditComponent {
   }
   onFileSelected(event: any) {
     this.file = event.target.files[0];
-  }
-  uploadFile() {
-
   }
   emailCheckValidator=(formC:FormControl):ValidationErrors|null=>{
     this.checking=true;
@@ -52,24 +49,6 @@ export class EditComponent {
         return {
           invalid: true,
           message: "Email already exists"
-        };
-      }
-      return null;
-    })
-  )}
-  usernameCheckValidator=(formC:FormControl):ValidationErrors|null=>{
-    this.checking=true;
-
-    return this.ls.checkUsername(formC.value).pipe(map(response => {
-      this.checking=false;
-      if(this.user?.username==formC.value){
-        this.checking=false;
-        return null;
-      }
-      if (response.message == "Exist") {
-        return {
-          invalid: true,
-          message: "Username already exists"
         };
       }
       return null;
@@ -95,11 +74,10 @@ export class EditComponent {
     this.user.surname=this.form.value.surname;
     this.user.email=this.form.value.email;
     this.user.birthday=this.form.value.birthday;
-    this.user.username=this.form.value.username;
+    this.user.publicUsername=this.form.value.publicUsername;
     this.user.info=this.form.value.info;
 
     if(this.file) {
-        this.uploadFile();
         if(!this.user) return
         this.ls.upload(this.user.id, this.file)
         .pipe(
@@ -115,12 +93,33 @@ export class EditComponent {
 
         if(!this.auth) return;
         this.auth.user=this.user;
-        this.ls.edit(this.auth).subscribe(()=>location.reload())
+
+        this.ls.edit(this.auth).subscribe(()=>{
+          this.swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: `Account updated!`,
+            showConfirmButton: false,
+            timer: 1500
+          }).then(()=>{
+            location.reload()
+          });
+        })
       });
     }else{
       if(!this.auth) return;
       this.auth.user=this.user;
-      this.ls.edit(this.auth).subscribe(()=>location.reload())
+
+      this.ls.edit(this.auth).subscribe(()=>
+        this.swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: `Account updated!`,
+          showConfirmButton: false,
+          timer: 1500
+        }).then(()=>{
+          location.reload()
+      }))
     }
   }
 
