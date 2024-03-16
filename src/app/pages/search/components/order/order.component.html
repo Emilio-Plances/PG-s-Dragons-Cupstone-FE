@@ -1,0 +1,16 @@
+<div id="order-button" ngbDropdown class="d-inline-block">
+  <button type="button" class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>
+    <i class="bi bi-list-ul"></i>
+  </button>
+  <div ngbDropdownMenu aria-labelledby="dropdownBasic1" class="p-2">
+    <h4>Users:</h4>
+    <div class="form-check">
+      <input class="form-check-input" (change)="orderNameDesc()" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+      <label class="form-check-label" for="flexRadioDefault2">By Name <i class="bi bi-arrow-down"></i></label>
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" (change)="orderNameAsc()" type="radio" name="flexRadioDefault" id="flexRadioDefault1" >
+      <label class="form-check-label" for="flexRadioDefault1">By Name <i class="bi bi-arrow-up"></i></label>
+    </div>
+  </div>
+</div>

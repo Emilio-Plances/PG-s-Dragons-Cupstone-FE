@@ -1,6 +1,6 @@
 import { IUser } from "./iuser";
 
-export interface ISingleResponse {
+export interface ISingleUser {
   responseDate:Date
   response:IUser|null
   message:string

@@ -11,6 +11,7 @@ const routes: Routes = [
   { path: 'myCharacters', loadChildren: () => import('./pages/my-characters/my-characters.module').then(m => m.MyCharactersModule),canActivate:[LogGuard] },
   { path: 'profile', loadChildren: () => import('./pages/profile/profile.module').then(m => m.ProfileModule)},
   { path: 'search/:searchValue', loadChildren: () => import('./pages/search/search.module').then(m => m.SearchModule) },
+  { path: 'spellDetails/:id', loadChildren: () => import('./pages/spell-details/spell-details.module').then(m => m.SpellDetailsModule) },
   { path: '**', component:Page404Component}
 ];
 

@@ -1,9 +1,8 @@
 import { Component, Inject, Input } from '@angular/core';
 import { IUser } from '../../../../interfaces/iuser';
 import { FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 import { LogService } from '../../../log-system/service/log.service';
-import { catchError, map, tap } from 'rxjs';
+import { catchError, map,} from 'rxjs';
 import { IUserAuth } from '../../../../interfaces/iuser-auth';
 
 @Component({
@@ -18,6 +17,7 @@ export class EditComponent {
   loading:boolean=false;
   checking:boolean=false;
   file!:File
+  linkFile:string|ArrayBuffer|null=null
   constructor(
     private fb:FormBuilder,
     private ls:LogService,
@@ -35,8 +35,16 @@ export class EditComponent {
     })
   }
   onFileSelected(event: any) {
-    this.file = event.target.files[0];
+      this.file = event.target.files[0];
+      if(this.file){
+        const READER=new FileReader();
+        READER.onload=()=>{
+        this.linkFile = READER.result as string;
+      };
+      READER.readAsDataURL(this.file);
+    }
   }
+
   emailCheckValidator=(formC:FormControl):ValidationErrors|null=>{
     this.checking=true;
     return this.ls.checkEmail(formC.value).pipe(map(response => {
@@ -63,7 +71,6 @@ export class EditComponent {
   isNotValidAndTouched(nameForm:string):boolean|undefined{
     return !this.isValid(nameForm) && this.isTouched(nameForm)
   }
-
   save():void{
     this.loading=true;
     this.form.value.name= this.form.value.name.charAt(0).toUpperCase()+this.form.value.name.slice(1).toLowerCase();

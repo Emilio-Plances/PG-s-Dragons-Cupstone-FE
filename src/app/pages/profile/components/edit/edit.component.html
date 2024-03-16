@@ -1,6 +1,7 @@
 <form [formGroup]="form" class="text-right">
-  <div class="text-center mt-3">
-    <label for="image"><img id="profile-photo" [src]="user?.linkPhoto? user?.linkPhoto:'../../../assets/images/user-missing.png'"></label>
+  <div class="text-center mt-3 drop-area">
+    <label *ngIf="!linkFile" for="image"><img id="profile-photo" [src]="user?.linkPhoto? user?.linkPhoto:'../../../assets/images/user-missing.png'"></label>
+    <label *ngIf="linkFile" for="image"><img id="profile-photo" [src]="linkFile" ></label>
     <input class="form-control d-none" id="image" type="file" name="profile_photo" placeholder="Photo" formControlName="photo" capture (change)="onFileSelected($event)">
   </div>
   <div id="public-username" class="mt-2">

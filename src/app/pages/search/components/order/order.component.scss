@@ -1,0 +1,11 @@
+
+#order-button{
+  position:absolute;
+  right:50px;
+  button{
+    width:40px;
+  }
+  .dropdown-toggle::after {
+    display: none;
+  }
+}

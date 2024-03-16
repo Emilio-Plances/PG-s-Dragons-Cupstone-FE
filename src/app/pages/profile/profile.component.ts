@@ -1,7 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { IUser } from '../../interfaces/iuser';
 import { LogService } from '../log-system/service/log.service';
-import { Router } from '@angular/router';
 import { IUserAuth } from '../../interfaces/iuser-auth';
 
 @Component({
@@ -22,7 +21,6 @@ export class ProfileComponent {
   constructor(
     private ls:LogService,
     @Inject('Swal') private swal: any,
-
   ){}
   ngOnInit():void{
     this.ls.isLogged$.subscribe(logged=>this.logged= logged)

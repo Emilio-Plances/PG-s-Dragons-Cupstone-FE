@@ -1,0 +1,11 @@
+
+#filter-button{
+  position:absolute;
+  right:5px;
+  button{
+    width:40px;
+  }
+  .dropdown-toggle::after {
+    display: none;
+  }
+}

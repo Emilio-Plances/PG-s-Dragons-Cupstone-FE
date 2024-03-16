@@ -1,6 +1,6 @@
 import { IUser } from "./iuser"
 
-export interface IPageResponse {
+export interface IPageUser {
   responseDate:Date
   response:IPage
   message:string

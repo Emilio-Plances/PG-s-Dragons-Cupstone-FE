@@ -1,0 +1,23 @@
+<div id="filter-button" ngbDropdown class="d-inline-block">
+  <button type="button" class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>
+    <i class="bi bi-funnel"></i>
+  </button>
+
+  <div ngbDropdownMenu aria-labelledby="dropdownBasic1" class="p-2">
+    <h4>Type:</h4>
+    <div class="form-check">
+      <input class="form-check-input" (change)="changeCharacters()" type="checkbox" id="flexCheckDefault" [(ngModel)]="boolCharacters">
+      <label class="form-check-label" for="flexCheckDefault">Characters</label>
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" (change)="changeUsers()" type="checkbox" id="flexCheckDefault" [(ngModel)]="boolUsers">
+      <label class="form-check-label" for="flexCheckDefault">Users</label>
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" (change)="changeSpells()" type="checkbox" id="flexCheckDefault" [(ngModel)]="boolSpells">
+      <label class="form-check-label" for="flexCheckDefault">Spells</label>
+    </div>
+    <h4>Spells:</h4>
+  </div>
+
+</div>
