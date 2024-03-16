@@ -16,7 +16,7 @@ export class SpellService {
   pageSize:number=10
 
   constructor(
-    private http:HttpClient,
+    private http:HttpClient
   ){}
 
   getAll():Observable<ISpellList>{

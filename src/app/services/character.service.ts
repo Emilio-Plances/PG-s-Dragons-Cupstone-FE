@@ -10,7 +10,6 @@ import { ICharacterList } from '../interfaces/iresponselist';
   providedIn: 'root'
 })
 export class CharacterService {
-
   constructor(
     private http:HttpClient
   ){}
