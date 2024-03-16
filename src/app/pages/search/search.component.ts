@@ -37,7 +37,7 @@ export class SearchComponent {
         this.users=data.response.content
         this.usersPages=data.response.totalPages
       });
-      this.ss.searchByName(this.search).subscribe(data=>{
+      this.ss.searchByNameAsc(this.search).subscribe(data=>{
         this.spells=data.response.content;
         this.spellPages=data.response.totalPages;
       });
@@ -58,6 +58,16 @@ export class SearchComponent {
     this.boolSpells=event;
     this.isFilterActive();
   }
+  ordernameAsc(){
+    if(!this.search) return;
+    this.ls.searchByName(this.search).subscribe(data=>{
+      this.users=data.response.content
+    });
+    this.ss.searchByNameAsc(this.search).subscribe(data=>{
+      this.spells=data.response.content;
+    });
+  }
+
   orderNameDesc(){
     if(!this.search) return;
 
@@ -65,20 +75,8 @@ export class SearchComponent {
       this.users=data.response.content
     });
 
-    this.ss.searchByName(this.search).subscribe(data=>{
+    this.ss.searchByNameDesc(this.search).subscribe(data=>{
       this.spells=data.response.content;
-    });
-  }
-  ordernameAsc(){
-    if(!this.search) return;
-
-    this.ls.searchByName(this.search).subscribe(data=>{
-      this.users=data.response.content
-      this.users.reverse();
-    });
-    this.ss.searchByName(this.search).subscribe(data=>{
-      this.spells=data.response.content;
-      this.spells.reverse();
     });
   }
 }

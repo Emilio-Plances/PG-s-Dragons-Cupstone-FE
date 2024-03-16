@@ -17,11 +17,14 @@ export class SpellService {
     private http:HttpClient,
   ){}
 
-  getAll(pageNumber:number):Observable<IPageSpell>{
+  getAllAsc(pageNumber:number):Observable<IPageSpell>{
     return this.http.get<IPageSpell>(`${this.spellURL}?page=${pageNumber}&size=${this.pageSize}`)
   }
-  searchByName(name:string, pageNumber:number=0):Observable<IPageSpell>{
-    return this.http.get<IPageSpell>(`${this.spellURL}/name?name=${name}&pageNumber=${pageNumber}&size=${this.pageSize}`);
+  searchByNameAsc(name:string, pageNumber:number=0):Observable<IPageSpell>{
+    return this.http.get<IPageSpell>(`${this.spellURL}/name/asc?name=${name}&pageNumber=${pageNumber}&size=${this.pageSize}`);
+  }
+  searchByNameDesc(name:string, pageNumber:number=0):Observable<IPageSpell>{
+    return this.http.get<IPageSpell>(`${this.spellURL}/name/desc?name=${name}&pageNumber=${pageNumber}&size=${this.pageSize}`);
   }
   getSingleById(id:number):Observable<ISingleSpell>{
     return this.http.get<ISingleSpell>(`${this.spellURL}/${id}`)

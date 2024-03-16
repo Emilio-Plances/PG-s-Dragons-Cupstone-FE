@@ -9,8 +9,8 @@ export class OrderComponent {
   @Output() orderNameDescEvent=new EventEmitter<boolean>()
   @Output() orderNameAscEvent=new EventEmitter<boolean>()
 
-  boolNameDesc:boolean=true
-  boolNameAsc:boolean=false
+  boolNameDesc:boolean=false
+  boolNameAsc:boolean=true
 
   orderNameDesc(){
     this.boolNameDesc=!this.boolNameDesc;

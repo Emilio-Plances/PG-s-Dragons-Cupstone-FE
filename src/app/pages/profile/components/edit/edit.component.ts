@@ -35,6 +35,7 @@ export class EditComponent {
     })
   }
   onFileSelected(event: any) {
+      this.linkFile=null;
       this.file = event.target.files[0];
       if(this.file){
         const READER=new FileReader();

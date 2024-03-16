@@ -33,7 +33,7 @@ export class SpellDetailsComponent {
     this.route.paramMap.subscribe(params => {
       let spellId:string|null = params.get('id');
       if(!spellId) return;
-      let id:number =Number(spellId);
+      let id:number=Number(spellId);
       this.ss.getSingleById(id).subscribe(data=>this.spell=data.response)
     });
   }
