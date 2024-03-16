@@ -4,13 +4,12 @@ import { Router } from "@angular/router";
 import { JwtHelperService } from "@auth0/angular-jwt";
 import { BehaviorSubject, map, Observable, tap } from "rxjs";
 import { environment } from "../../../../environments/environment.development";
-import { ISingleUser } from "../../../interfaces/isingleuser";
-import { ILogin } from "../../../interfaces/ilogin";
-import { IPassword } from "../../../interfaces/ipassword";
-import { IRegister } from "../../../interfaces/iregister";
-import { IResponse } from "../../../interfaces/iresponse";
-import { IUserAuth } from "../../../interfaces/iuser-auth";
-import { IPageUser } from "../../../interfaces/ipageuser";
+import { IListUser } from "../../../interfaces/ilistresponse";
+
+
+import { IUserAuth, IUserResponse } from "../../../interfaces/iresponses";
+import { IRegister, ILogin, IPassword } from "../../../interfaces/irequest";
+
 
 @Injectable({
   providedIn: 'root'
@@ -67,41 +66,41 @@ export class LogService {
     this.loggedUser.next(null);
     this.router.navigate(['/home']);
   }
-  checkUsername(username:string):Observable<IResponse>{
-    return this.http.get<IResponse>(`${this.authURL}/checkUsername?username=${username}`);
+  checkUsername(username:string):Observable<IUserResponse>{
+    return this.http.get<IUserResponse>(`${this.authURL}/checkUsername?username=${username}`);
   }
-  checkEmail(email:string):Observable<IResponse>{
-    return this.http.get<IResponse>(`${this.authURL}/checkEmail?email=${email}`);
+  checkEmail(email:string):Observable<IUserResponse>{
+    return this.http.get<IUserResponse>(`${this.authURL}/checkEmail?email=${email}`);
   }
 
   /*___________________USERS CALLS_______________________*/
 
-  getAll(pageNumber:number): Observable<IPageUser> {
-    return this.http.get<IPageUser>(`${this.noLogUserURL}?page=${pageNumber}&size=${this.pageSize}`);
+  getAll(pageNumber:number): Observable<IListUser> {
+    return this.http.get<IListUser>(`${this.noLogUserURL}?page=${pageNumber}&size=${this.pageSize}`);
   }
-  searchByName(publicUsername:String, pageNumber:number=0):Observable<IPageUser>{
-    return this.http.get<IPageUser>(`${this.noLogUserURL}/publicUsername?publicUsername=${publicUsername}&page=${pageNumber}&size=${this.pageSize}`);
+  searchByName(publicUsername:String, pageNumber:number=0):Observable<IListUser>{
+    return this.http.get<IListUser>(`${this.noLogUserURL}/publicUsername?publicUsername=${publicUsername}&page=${pageNumber}&size=${this.pageSize}`);
   }
-  getById(id:number):Observable<ISingleUser>{
-    return this.http.get<ISingleUser>(`${this.noLogUserURL}/${id}`);
+  getById(id:number):Observable<IUserResponse>{
+    return this.http.get<IUserResponse>(`${this.noLogUserURL}/${id}`);
   }
-  getByrealUsername(username:string,):Observable<ISingleUser> {
-    return this.http.get<ISingleUser>(`${this.noLogUserURL}/param?username=${username}`);
+  getByrealUsername(username:string,):Observable<IUserResponse> {
+    return this.http.get<IUserResponse>(`${this.noLogUserURL}/param?username=${username}`);
   }
-  edit(auth:IUserAuth):Observable<ISingleUser> {
+  edit(auth:IUserAuth):Observable<IUserResponse> {
     this.loggedUser.next(auth);
     localStorage.setItem(`login`,JSON.stringify(auth));
-    return this.http.patch<ISingleUser>(`${this.logUserURL}/${auth.user.id}`,auth.user)
+    return this.http.patch<IUserResponse>(`${this.logUserURL}/${auth.user.id}`,auth.user)
   }
-  upload(id:number,file:File):Observable<ISingleUser>{
+  upload(id:number,file:File):Observable<IUserResponse>{
     const formData = new FormData();
     formData.append('upload', file);
-    return this.http.patch<ISingleUser>(`${this.logUserURL}/${id}/upload`,formData);
+    return this.http.patch<IUserResponse>(`${this.logUserURL}/${id}/upload`,formData);
   }
-  changePassword(id:number,passwords:IPassword):Observable<ISingleUser>{
-    return this.http.patch<ISingleUser>(`${this.logUserURL}/${id}/password`,passwords);
+  changePassword(id:number,passwords:IPassword):Observable<IUserResponse>{
+    return this.http.patch<IUserResponse>(`${this.logUserURL}/${id}/password`,passwords);
   }
-  deleteUser(id:number):Observable<ISingleUser>{
-    return this.http.delete<ISingleUser>(`${this.logUserURL}/${id}`);
+  deleteUser(id:number):Observable<IUserResponse>{
+    return this.http.delete<IUserResponse>(`${this.logUserURL}/${id}`);
   }
 }

@@ -33,14 +33,8 @@ export class SearchComponent {
       let searchValue = params.get('searchValue');
       if (searchValue) this.search=searchValue;
       if(!this.search) return;
-      this.ls.searchByName(this.search).subscribe(data=>{
-        this.users=data.response.content
-        this.usersPages=data.response.totalPages
-      });
-      this.ss.searchByNameAsc(this.search).subscribe(data=>{
-        this.spells=data.response.content;
-        this.spellPages=data.response.totalPages;
-      });
+      this.ls.searchByName(this.search).subscribe(data=>this.users=data.response);
+      this.ss.searchByName(this.search).subscribe(data=>this.spells=data.response);
     });
   }
   isFilterActive(){
@@ -59,24 +53,9 @@ export class SearchComponent {
     this.isFilterActive();
   }
   ordernameAsc(){
-    if(!this.search) return;
-    this.ls.searchByName(this.search).subscribe(data=>{
-      this.users=data.response.content
-    });
-    this.ss.searchByNameAsc(this.search).subscribe(data=>{
-      this.spells=data.response.content;
-    });
+    this.spells.reverse();
   }
-
   orderNameDesc(){
-    if(!this.search) return;
-
-    this.ls.searchByName(this.search).subscribe(data=>{
-      this.users=data.response.content
-    });
-
-    this.ss.searchByNameDesc(this.search).subscribe(data=>{
-      this.spells=data.response.content;
-    });
+    this.spells.reverse();
   }
 }

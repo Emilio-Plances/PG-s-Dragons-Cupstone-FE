@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ILogin } from '../../../interfaces/ilogin';
 import { LogService } from '../service/log.service';
 import { catchError, map } from 'rxjs';
+import { ILogin } from '../../../interfaces/irequest';
 
 @Component({
   selector: 'app-login',

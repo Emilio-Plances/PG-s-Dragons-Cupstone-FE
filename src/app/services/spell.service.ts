@@ -1,9 +1,10 @@
-import { IPageSpell } from './../interfaces/ipage-spell';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment.development';
-import { ISingleSpell } from '../interfaces/isingle-spell';
 import { Observable } from 'rxjs';
+import { IListSpell } from '../interfaces/ilistresponse';
+import { ISpellResponse } from '../interfaces/iresponses';
+
 
 @Injectable({
   providedIn: 'root'
@@ -17,16 +18,13 @@ export class SpellService {
     private http:HttpClient,
   ){}
 
-  getAllAsc(pageNumber:number):Observable<IPageSpell>{
-    return this.http.get<IPageSpell>(`${this.spellURL}?page=${pageNumber}&size=${this.pageSize}`)
+  getAllAsc(pageNumber:number):Observable<IListSpell>{
+    return this.http.get<IListSpell>(`${this.spellURL}?page=${pageNumber}&size=${this.pageSize}`)
   }
-  searchByNameAsc(name:string, pageNumber:number=0):Observable<IPageSpell>{
-    return this.http.get<IPageSpell>(`${this.spellURL}/name/asc?name=${name}&pageNumber=${pageNumber}&size=${this.pageSize}`);
+  searchByName(name:string):Observable<IListSpell>{
+    return this.http.get<IListSpell>(`${this.spellURL}/name?name=${name}`);
   }
-  searchByNameDesc(name:string, pageNumber:number=0):Observable<IPageSpell>{
-    return this.http.get<IPageSpell>(`${this.spellURL}/name/desc?name=${name}&pageNumber=${pageNumber}&size=${this.pageSize}`);
-  }
-  getSingleById(id:number):Observable<ISingleSpell>{
-    return this.http.get<ISingleSpell>(`${this.spellURL}/${id}`)
+  getSingleById(id:number):Observable<ISpellResponse>{
+    return this.http.get<ISpellResponse>(`${this.spellURL}/${id}`)
   }
 }

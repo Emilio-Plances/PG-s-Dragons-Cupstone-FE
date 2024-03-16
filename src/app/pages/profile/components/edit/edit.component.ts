@@ -3,7 +3,7 @@ import { IUser } from '../../../../interfaces/iuser';
 import { FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { LogService } from '../../../log-system/service/log.service';
 import { catchError, map,} from 'rxjs';
-import { IUserAuth } from '../../../../interfaces/iuser-auth';
+import { IUserAuth } from '../../../../interfaces/iresponses';
 
 @Component({
   selector: 'app-edit',

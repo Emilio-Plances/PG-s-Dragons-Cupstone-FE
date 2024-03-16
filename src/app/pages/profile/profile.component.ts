@@ -1,7 +1,8 @@
 import { Component, Inject } from '@angular/core';
 import { IUser } from '../../interfaces/iuser';
 import { LogService } from '../log-system/service/log.service';
-import { IUserAuth } from '../../interfaces/iuser-auth';
+import { IUserAuth } from '../../interfaces/iresponses';
+
 
 @Component({
   selector: 'app-profile',

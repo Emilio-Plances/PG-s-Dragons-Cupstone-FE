@@ -1,5 +1,6 @@
 <div class="mt-2">
   <h2>{{spell.name}}</h2>
+  <p>Classes: {{spell.pgClassList}}</p>
   <p>School: {{spell.school}}</p>
   <p>Level: {{spell.level}}</p>
   <p>Components: [
@@ -8,6 +9,7 @@
     <i *ngIf="spell.components[2]">M</i>
     ]
   </p>
+
   <p *ngIf="spell.materialCost.length!=0">Materials: {{spell.materialCost}}</p>
   <p>castTime: {{spell.castTime}}</p>
   <p>range: {{spell.range}}</p>

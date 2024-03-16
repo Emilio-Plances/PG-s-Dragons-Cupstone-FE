@@ -17,6 +17,8 @@ export class MyCharactersComponent {
   ngOnInit():void{
     this.ls.isLogged$.subscribe(logged=>this.logged= logged)
     this.ls.user$.subscribe(user=>this.user=user?.user )
+
   }
+
 
 }

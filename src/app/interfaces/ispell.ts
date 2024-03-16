@@ -1,9 +1,9 @@
-import { Classes } from "./classes"
+import { Classes, School } from "./enum"
 
 export interface ISpell {
   id:number
   name:string
-  pgClasses:Classes[]
+  pgClassList:Classes[]
   level:number
   school:School
   castTime:string
@@ -12,15 +12,4 @@ export interface ISpell {
   components:boolean[]
   materialCost:string
   description:string
-}
-
-export enum School{
-  Abjuration,
-  Conjuration,
-  Divination,
-  Enchantment,
-  Evocation,
-  Illusion,
-  Transmutation,
-  Necromancy
 }

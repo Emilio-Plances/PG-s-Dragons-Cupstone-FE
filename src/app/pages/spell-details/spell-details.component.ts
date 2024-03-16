@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SpellService } from '../../services/spell.service';
-import { ISpell, School } from '../../interfaces/ispell';
+import { ISpell } from '../../interfaces/ispell';
+import { School } from '../../interfaces/enum';
 
 @Component({
   selector: 'app-spell-details',
@@ -13,7 +14,7 @@ export class SpellDetailsComponent {
   spell:ISpell={
     id: 0,
     name: '',
-    pgClasses: [],
+    pgClassList: [],
     level: 0,
     castTime: '',
     range: '',
@@ -34,7 +35,9 @@ export class SpellDetailsComponent {
       let spellId:string|null = params.get('id');
       if(!spellId) return;
       let id:number=Number(spellId);
-      this.ss.getSingleById(id).subscribe(data=>this.spell=data.response)
+      this.ss.getSingleById(id).subscribe(data=>{
+        this.spell=data.response
+      })
     });
   }
 }

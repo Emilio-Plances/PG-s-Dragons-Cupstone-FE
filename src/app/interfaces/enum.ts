@@ -13,3 +13,13 @@ export enum Classes {
   Warlock,
   Wizard
 }
+export enum School{
+  Abjuration,
+  Conjuration,
+  Divination,
+  Enchantment,
+  Evocation,
+  Illusion,
+  Transmutation,
+  Necromancy
+}
