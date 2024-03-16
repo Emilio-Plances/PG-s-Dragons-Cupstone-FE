@@ -2,8 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment.development';
 import { Observable } from 'rxjs';
-import { IListSpell } from '../interfaces/ilistresponse';
+import { ISpellList } from '../interfaces/iresponselist';
 import { ISpellResponse } from '../interfaces/iresponses';
+
 
 
 @Injectable({
@@ -18,11 +19,11 @@ export class SpellService {
     private http:HttpClient,
   ){}
 
-  getAllAsc(pageNumber:number):Observable<IListSpell>{
-    return this.http.get<IListSpell>(`${this.spellURL}?page=${pageNumber}&size=${this.pageSize}`)
+  getAll():Observable<ISpellList>{
+    return this.http.get<ISpellList>(this.spellURL)
   }
-  searchByName(name:string):Observable<IListSpell>{
-    return this.http.get<IListSpell>(`${this.spellURL}/name?name=${name}`);
+  searchByName(name:string):Observable<ISpellList>{
+    return this.http.get<ISpellList>(`${this.spellURL}/name?name=${name}`);
   }
   getSingleById(id:number):Observable<ISpellResponse>{
     return this.http.get<ISpellResponse>(`${this.spellURL}/${id}`)

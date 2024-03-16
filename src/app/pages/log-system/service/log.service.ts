@@ -4,7 +4,7 @@ import { Router } from "@angular/router";
 import { JwtHelperService } from "@auth0/angular-jwt";
 import { BehaviorSubject, map, Observable, tap } from "rxjs";
 import { environment } from "../../../../environments/environment.development";
-import { IListUser } from "../../../interfaces/ilistresponse";
+import { IUserList } from "../../../interfaces/iresponselist";
 
 
 import { IUserAuth, IUserResponse } from "../../../interfaces/iresponses";
@@ -31,7 +31,7 @@ export class LogService {
   constructor(
     private http:HttpClient,
     private router:Router
-  ){this.logged();}
+  ){this.logged()}
 
   /*___________________AUTHENTICATION CALLS_______________________*/
 
@@ -75,11 +75,11 @@ export class LogService {
 
   /*___________________USERS CALLS_______________________*/
 
-  getAll(pageNumber:number): Observable<IListUser> {
-    return this.http.get<IListUser>(`${this.noLogUserURL}?page=${pageNumber}&size=${this.pageSize}`);
+  getAll(pageNumber:number): Observable<IUserList> {
+    return this.http.get<IUserList>(`${this.noLogUserURL}?page=${pageNumber}&size=${this.pageSize}`);
   }
-  searchByName(publicUsername:String, pageNumber:number=0):Observable<IListUser>{
-    return this.http.get<IListUser>(`${this.noLogUserURL}/publicUsername?publicUsername=${publicUsername}&page=${pageNumber}&size=${this.pageSize}`);
+  searchByName(publicUsername:String, pageNumber:number=0):Observable<IUserList>{
+    return this.http.get<IUserList>(`${this.noLogUserURL}/publicUsername?publicUsername=${publicUsername}&page=${pageNumber}&size=${this.pageSize}`);
   }
   getById(id:number):Observable<IUserResponse>{
     return this.http.get<IUserResponse>(`${this.noLogUserURL}/${id}`);
