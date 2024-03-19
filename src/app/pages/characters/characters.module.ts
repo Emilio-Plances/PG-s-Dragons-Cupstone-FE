@@ -6,6 +6,8 @@ import { EditCharComponent } from './components/edit-char/edit-char.component';
 import { NoEditComponent } from './components/no-edit/no-edit.component';
 import { StatsComponent } from './components/no-edit/stats/stats.component';
 
+import { FormsModule } from '@angular/forms';
+
 @NgModule({
   declarations: [
     CharactersComponent,
@@ -16,6 +18,7 @@ import { StatsComponent } from './components/no-edit/stats/stats.component';
   imports: [
     CommonModule,
     CharactersRoutingModule,
+    FormsModule
   ]
 })
 export class CharactersModule { }

@@ -4,10 +4,10 @@
   <p>Class: {{char.pgClass.length!=0?char.pgClass: 'None'}}</p>
 
   <div class="d-flex justify-content-between">
-    <button class="btn btn-danger" (click)="deleteChar(char.id)">Delete</button>
+    <button class="btn btn-danger" (click)="deleteChar(char.id,$event)">Delete</button>
     <a class="btn btn-warning" [routerLink]="['/characters/edit',char.id]">Edit</a>
   </div>
 </div>
-<div id="add-char" (click)="addChar()" class="rounded-circle bg-success text-white text-center">
+<div id="add-char" (click)="addChar($event)" class="rounded-circle bg-success text-white text-center">
   <i class="bi bi-plus-circle"></i>
 </div>

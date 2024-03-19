@@ -30,16 +30,18 @@ export class CharactersComponent {
     } )
 
   }
-  addChar(){
+  addChar(event:any){
+    event.stopPropagation();
     if(!this.user) return;
     let newChar:ICharacterRequest={
       userId: this.user?.id
     }
     this.cs.create(newChar).subscribe(data=>{
-      this.router.navigate([`/characters`,data.response.id]);
+      this.router.navigate([`/characters/edit`,data.response.id]);
     })
   }
-  deleteChar(id:number){
+  deleteChar(id:number,event:any){
+    event.stopPropagation();
     this.cs.delete(id).subscribe(()=> this.characters=this.characters.filter(el=>el.id != id));
   }
 }
