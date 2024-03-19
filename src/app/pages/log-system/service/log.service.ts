@@ -88,9 +88,11 @@ export class LogService {
     return this.http.get<IUserResponse>(`${this.noLogUserURL}/param?username=${username}`);
   }
   edit(auth:IUserAuth):Observable<IUserResponse> {
-    this.loggedUser.next(auth);
-    localStorage.setItem(`login`,JSON.stringify(auth));
     return this.http.patch<IUserResponse>(`${this.logUserURL}/${auth.user.id}`,auth.user)
+    .pipe(tap(()=>{
+      this.loggedUser.next(auth);
+      localStorage.setItem(`login`,JSON.stringify(auth));
+    }))
   }
   upload(id:number,file:File):Observable<IUserResponse>{
     const formData = new FormData();

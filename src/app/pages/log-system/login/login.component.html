@@ -16,7 +16,7 @@
   <div *ngIf="notFound" class="bg-danger rounded p-2">Username/Password wrong!</div>
   <div *ngIf="anotherProblem" class="bg-danger rounded px-2">Something Wrong!</div>
   <div class="d-flex justify-content-between align-items-center mt-3">
-    <p>You're not signed? <a routerLink="/logSystem/register">Sign up now</a></p>
+    <p>You're not signed? <a routerLink="/logSystem/register">Sign up</a></p>
     <button id="submit" class="btn btn-primary" (click)="submit()" [disabled]="!form.valid||loading">Log in</button>
   </div>
 </form>

@@ -1,28 +1,59 @@
-<form>
-  <div class="d-flex align-items-center">
-    <label for="name">Name:</label>
-    <input class="ms-2 form-control" id="name" type="text" name="name" [(ngModel)]="char.name">
-  </div>
-  <div class="form-check form-switch">
-    <input [checked]="char.status=='Public'" class="form-check-input" type="checkbox" (change)="changeStatus()" role="switch" id="flexSwitchCheckDefault" name="status">
-    <label class="form-check-label"  for="flexSwitchCheckDefault">{{char.status}}</label>
-  </div>
-
-  <div class="d-flex align-items-center mt-2">
-    <label for="race">Race:</label>
-    <select class="ms-2 form-control" name="race" id="race" [(ngModel)]="char.race">
-      <option *ngFor="let race of races" [hidden]="race=='null'" [disabled]="race=='null'" [selected]="race=='null'" [value]="race">{{race.replace("_"," ").replace("null","None")}}</option>
-    </select>
+<form class="container" *ngIf="!loading">
+  <div class="row justify-content-evenly align-items-center">
+    <div class="d-flex align-items-center col-6">
+      <label for="name">Name:</label>
+      <input class="ms-2 form-control" id="name" type="text" name="name" [(ngModel)]="char.name">
+    </div>
+    <div class="form-check-reverse  form-switch col-6 ">
+      <label class="form-check-label"  for="flexSwitchCheckReverse">{{char.status}}</label>
+      <input [checked]="char.status=='Public'" class="form-check-input" type="checkbox" (change)="changeStatus()" role="switch" id="flexSwitchCheckDefault" name="status">
+    </div>
   </div>
 
-  <div class="d-flex align-items-center mt-2">
-    <label for="pgClass">Class:</label>
-    <select class="ms-2 form-control" name="pgClass" id="pgClass" (change)="setClass()" [(ngModel)]="char.pgClass[0]">
-      <option *ngFor="let class of classes" [hidden]="class=='null'" [disabled]="class=='null'" [selected]="class=='null'" [value]="class">{{class.replace("_"," ").replace("null","None")}}</option>
-    </select>
+  <div class="d-flex justify-content-evenly mt-3">
+      <p class="m-0">HP: {{char.hp}}</p>
+    <p class="m-0">Dice: {{char.dice}}</p>
   </div>
 
-  <div>HP: {{char.hp}}</div>
-  <div>Dice: {{char.dice}}</div>
+  <div class="row">
+    <div class="d-flex align-items-center mt-2 col-6">
+      <label for="race">Race:</label>
+      <select class="ms-2 form-control" name="race" id="race" [(ngModel)]="char.race">
+        <option *ngFor="let race of races" [hidden]="race=='null'" [disabled]="race=='null'" [selected]="race=='null'" [value]="race">{{race.replace("_"," ").replace("null","None")}}</option>
+      </select>
+    </div>
+    <div class="d-flex align-items-center mt-2 col-6">
+      <label for="pgClass">Class:</label>
+      <select class="ms-2 form-control" name="pgClass" id="pgClass" (change)="setClass()" [(ngModel)]="char.pgClass[0]">
+        <option *ngFor="let class of classes" [hidden]="class=='null'" [disabled]="class=='null'" [selected]="class=='null'" [value]="class">{{class.replace("_"," ").replace("null","None")}}</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="row mt-3">
+    <div class="col-6 text-center">
+      <label for="strenght">Strenght:</label>
+      <input (change)="mod('str')" class="ms-2 form-control text-center" id="strenght" type="number" name="strenght" [(ngModel)]="char.strenght">
+    </div>
+    <div class="col-6 text-center">
+      <label for="dexterity">Dexterity:</label>
+      <input (change)="mod('dex')" class="ms-2 form-control text-center" id="dexterity" type="number" name="dexterity" [(ngModel)]="char.dexterity">
+    </div>
+    <div class="col-6 text-center">
+      <label for="constitution">Constitution:</label>
+      <input (change)="mod('con')" class="ms-2 form-control text-center" id="constitution" type="number" name="constitution" [(ngModel)]="char.constitution">
+    </div>
+    <div class="col-6 text-center">
+      <label for="intelligence">Intelligence:</label>
+      <input (change)="mod('int')" class="ms-2 form-control text-center" id="intelligence" type="number" name="intelligence" [(ngModel)]="char.intelligence">
+    </div>
+    <div class="col-6 text-center">
+      <label for="charisma">Charisma:</label>
+      <input (change)="mod('cha')" class="ms-2 form-control text-center" id="charisma" type="number" name="charisma" [(ngModel)]="char.charisma">
+    </div>
+    <div class="col-6 text-center">
+      <label for="wisdom">Wisdom:</label>
+      <input (change)="mod('wis')" class="ms-2 form-control text-center" id="wisdom" type="number" name="wisdom" [(ngModel)]="char.wisdom">
+    </div>
+  </div>
 </form>
-

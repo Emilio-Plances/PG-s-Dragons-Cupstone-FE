@@ -12,7 +12,7 @@ import { CharacterService } from '../../../../services/character.service';
 })
 export class EditCharComponent {
   char!:ICharacter;
-  loading!:boolean;
+  loading:boolean=true;
   races:Race[]=Object.values(Race);
   classes:Classes[]=Object.values(Classes);
   modStr!:number;
@@ -32,13 +32,11 @@ export class EditCharComponent {
       if (!idString) return;
       let id:number=parseInt(idString);
       this.cs.getById(id).subscribe(data=>{
-        this.modStr=Math.floor((data.response.strenght-10)/2);
-        this.modDex=Math.floor((data.response.dexterity-10)/2);
-        this.modCon=Math.floor((data.response.constitution-10)/2);
-        this.modInt=Math.floor((data.response.intelligence-10)/2);
-        this.modCha=Math.floor((data.response.charisma-10)/2);
-        this.modWis=Math.floor((data.response.wisdom-10)/2);
         this.char=data.response;
+
+        this.mod("str");  this.mod("dex");
+        this.mod("con");  this.mod("int");
+        this.mod("cha");  this.mod("wis");
 
         this.loading=false;
       })
@@ -49,7 +47,7 @@ export class EditCharComponent {
     else this.char.status=Status.Private
   }
   setClass(){
-    this.setHP()
+    this.setHP();
   }
   setHP(){
     switch(this.char.pgClass[0]){
@@ -67,7 +65,6 @@ export class EditCharComponent {
       case Classes.Rogue:
       case Classes.Monk:
       case Classes.Warlock:
-
         this.char.dice=Dice.D8;
         break;
       case Classes.Sorcerer:
@@ -77,5 +74,27 @@ export class EditCharComponent {
     }
     this.char.hp=this.char.dice+this.modCon
   }
-
+  mod(stat:string){
+    switch(stat){
+      case "str":
+        this.modStr=Math.floor((this.char.strenght-10)/2);
+        break;
+      case "dex":
+        this.modDex=Math.floor((this.char.dexterity-10)/2);
+        break;
+      case "con":
+        this.modCon=Math.floor((this.char.constitution-10)/2);
+        this.setHP();
+        break;
+      case "int":
+        this.modInt=Math.floor((this.char.intelligence-10)/2);
+        break;
+      case "cha":
+        this.modCha=Math.floor((this.char.charisma-10)/2);
+        break;
+      case "wis":
+        this.modWis=Math.floor((this.char.wisdom-10)/2);
+        break;
+    }
+  }
 }
