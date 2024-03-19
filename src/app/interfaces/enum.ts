@@ -91,3 +91,7 @@ export enum Skill{
   Survival,
   Wisdom
 }
+export enum Role{
+  User,
+  Admin
+}

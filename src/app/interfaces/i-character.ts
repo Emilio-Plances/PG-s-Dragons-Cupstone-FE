@@ -4,16 +4,17 @@ import { IUser } from "./iuser";
 
 export interface ICharacter {
   id:number,
-  user:IUser,
+  user:IUser|null,
   status:Status,
   name:string,
-  pgClass:Classes,
+  pgClass:Classes[],
   classArmor:number,
   dice:Dice,
   proficiency:number,
   initiative:number,
   image:string,
   race:Race,
+  level:Map<Classes,number>|undefined,
   hp:number,
   background:Background,
   alignment:Alignment,
@@ -25,6 +26,6 @@ export interface ICharacter {
   wisdom:number,
   charisma:number,
   spells:ISpell[],
-  skills:Skill,
+  skills:Skill[],
   preferredUsers:IUser[]
 }

@@ -1,0 +1,30 @@
+<div *ngIf="!loading">
+  <div class="justify-content-between">
+    <div class="text-center">
+      <h1 class="fw-bold m-0">{{char?.name}}</h1>
+      <p class="fs-6 fw-normal m-0"><i >{{char?.race}}</i> <i class="fs-6 fw-normal"> {{printClass()}}</i></p>
+      <img id=char-img [src]="char?.image? char?.image:'../../../assets/images/character-missing.png'" alt="">
+    </div>
+    <div class="d-flex justify-content-evenly mt-3">
+      <p><span class="fw-bold">HP:</span> {{char?.hp}}</p>
+      <p><span class="fw-bold">Proficiency:</span> {{char?.proficiency}}</p>
+      <p><span class="fw-bold">Initiative:</span> {{char?.initiative}}</p>
+    </div>
+    <div class="d-flex justify-content-evenly">
+      <p><span class="fw-bold">CA:</span> {{char?.classArmor}}</p>
+      <p><span class="fw-bold">Background:</span> {{char?.background}}</p>
+      <p><span class="fw-bold">Dice:</span> {{char?.dice}}</p>
+    </div>
+    <div class="stats row">
+      <app-stats [input]="char?.strenght" class="col-6 px-1 mb-2"><p class="m-0 ms-1">Strenght</p></app-stats>
+      <app-stats [input]="char?.dexterity" class="col-6 px-1 mb-2"><p class="m-0 ms-1">Dexterity</p></app-stats>
+      <app-stats [input]="char?.constitution" class="col-6 px-1 mb-2"><p class="m-0 ms-1">Constitution</p></app-stats>
+      <app-stats [input]="char?.intelligence" class="col-6 px-1 mb-2"><p class="m-0 ms-1">Intelligence</p></app-stats>
+      <app-stats [input]="char?.charisma" class="col-6 px-1 mb-2"><p class="m-0 ms-1">Charisma</p></app-stats>
+      <app-stats [input]="char?.wisdom" class="col-6 px-1 mb-2"><p class="m-0 ms-1">Wisdom</p></app-stats>
+    </div>
+
+
+  </div>
+</div>
+

@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 import { ICharacterResponse } from '../interfaces/iresponses';
 import { environment } from '../../environments/environment.development';
 import { ICharacterList } from '../interfaces/iresponselist';
+import { ICharacterRequest } from '../interfaces/irequest';
+import { ICharacter } from '../interfaces/i-character';
 
 
 @Injectable({
@@ -20,7 +22,19 @@ export class CharacterService {
   getAll():Observable<ICharacterList>{
     return this.http.get<ICharacterList>(this.noLogcharacterURL);
   }
-  getSingle(id:string):Observable<ICharacterResponse>{
+  getById(id:number):Observable<ICharacterResponse>{
     return this.http.get<ICharacterResponse>(`${this.noLogcharacterURL}/${id}`);
+  }
+  getByUserId(userId:number):Observable<ICharacterList>{
+    return this.http.get<ICharacterList>(`${this.logCharacterURL}/${userId}/getChar`)
+  }
+  edit(char:ICharacter):Observable<ICharacterResponse>{
+    return this.http.put<ICharacterResponse>(`${this.logCharacterURL}/${char.id}`,char)
+  }
+  create(newChar:ICharacterRequest):Observable<ICharacterResponse>{
+    return this.http.post<ICharacterResponse>(this.logCharacterURL,newChar);
+  }
+  delete(id:number):Observable<ICharacterResponse>{
+    return this.http.delete<ICharacterResponse>(`${this.logCharacterURL}/${id}`);
   }
 }

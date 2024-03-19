@@ -1,0 +1,8 @@
+<div class="stat p-1 d-flex text-center justify-content-between align-items-center">
+  <ng-content></ng-content>
+  <div id="values" class="d-flex justify-content-center">
+    <p class="m-0">{{stat}}</p>
+    <div class="modifier"> ({{modifier(stat)>=0? '+'+modifier(stat):modifier(stat)}})</div>
+  </div>
+</div>
+

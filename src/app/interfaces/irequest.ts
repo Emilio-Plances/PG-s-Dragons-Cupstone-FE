@@ -15,3 +15,6 @@ export interface ILogin {
   username:string|null
   password:string
 }
+export interface ICharacterRequest{
+  userId:number
+}

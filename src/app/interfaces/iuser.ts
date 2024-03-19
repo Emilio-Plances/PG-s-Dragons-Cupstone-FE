@@ -1,3 +1,5 @@
+import { Role } from "./enum"
+
 export interface IUser {
   id: number
   username: string
@@ -8,9 +10,6 @@ export interface IUser {
   birthday: Date|null
   info: string|null
   linkPhoto: string|null
-  role: Role|null
+  role: Role
 }
-enum Role{
-  User,
-  Admin
-}
+
