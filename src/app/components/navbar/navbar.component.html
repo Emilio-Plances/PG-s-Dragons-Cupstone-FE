@@ -1,21 +1,31 @@
-<nav id="navbar-mobile" class="navbar bg-body-tertiary">
-  <div class="w-100">
-    <div id="logo-block" class="text-center mb-2">
-      <a id="logo" class="navbar-brand w-25" routerLink="/home">LOGO-OMG</a>
+<nav id="navbar" class="navbar navbar-expand-lg">
+  <div class="container-fluid">
+    <div id="logo-block" class="text-center mb-2 w-100">
+      <a class="navbar-brand w-25" routerLink="/home"><img id="logo" src="../../../assets/images/logo.png" alt="Logo"></a>
     </div>
-    <div id="links" class="text-center d-flex">
-      <a id="home" class="link w-50" routerLink="/home">Home</a>
-      <a class="link w-50" routerLink="/characters">My Characters</a>
+    <div class="w-100 d-flex justify-content-between">
+      <div class="mt-1 mt-2 mb-0 mx-4">
+        <input class="form-control m-0" (input)="search()" type="search" placeholder="Search" aria-label="Search" [(ngModel)]="value" name="search">
+        <button class="d-none" type="submit" (click)="search()"><i class="bi bi-search"></i></button>
+      </div>
+      <button id="menu-button" type="button" (click)="show=!show">
+        <i id="menu" class="bi bi-list"></i>
+      </button>
     </div>
-    <form class="mt-1 mt-2 mb-0 mx-4">
-      <input class="form-control m-0" (input)="search()" type="search" placeholder="Search" aria-label="Search" [(ngModel)]="value" name="search">
-      <button class="d-none" type="submit" (click)="search()"><i class="bi bi-search"></i></button>
-    </form>
+    <div [ngClass]="{'showHeight':show}" class="height-0 show w-100" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mt-2 mb-lg-0">
+        <li class="text-start"><a id="home" class="link" routerLink="/home" (click)="show=!show">Home</a></li>
+        <li class="text-start"><a class="link" routerLink="/characters" (click)="show=!show">My Characters</a></li>
+        <li class="text-start"><a class="link" routerLink="/characters" (click)="show=!show">Preferred</a></li>
+        <li class="text-start"><a class="link" routerLink="/characters" (click)="show=!show">Helps</a></li>
+      </ul>
+    </div>
   </div>
-  <div id="login-ball" *ngIf="!logSystem" class="rounded-circle bg-primary text-white text-center">
+
+  <div id="login-ball" *ngIf="!logSystem" class="rounded-circle text-center">
     <a class="nav-link" *ngIf="!logged" routerLink="/logSystem/login"><i class="bi bi-person"></i></a>
     <div *ngIf="logged" ngbDropdown placement="top-start">
-      <div class="rounded-circle bg-primary text-white" id="dropdownBasic2" ngbDropdownToggle><i class="bi bi-person-fill"></i></div>
+      <div class="rounded-circle" id="dropdownBasic2" ngbDropdownToggle><i class="bi bi-person-fill"></i></div>
       <div id="dropdown" ngbDropdownMenu aria-labelledby="dropdownBasic2">
         <a (click)="logout()" ngbDropdownItem>Logout</a>
         <a routerLink="/profile" ngbDropdownItem>Profile</a>

@@ -35,7 +35,7 @@ export class SpellDetailsComponent {
       let spellId:string|null = params.get('id');
       if(!spellId) return;
       let id:number=Number(spellId);
-      this.ss.getSingleById(id).subscribe(data=>{
+      this.ss.getById(id).subscribe(data=>{
         this.spell=data.response
       })
     });

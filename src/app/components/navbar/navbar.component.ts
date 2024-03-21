@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { LogService } from '../../pages/log-system/service/log.service';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 
@@ -13,6 +13,7 @@ export class NavbarComponent {
   logSystem!:boolean;
   value:string="";
   counter:number=0;
+  show!:boolean
 
   constructor(
     private ls:LogService,
@@ -25,7 +26,16 @@ export class NavbarComponent {
     });
     this.ls.isLogged$.subscribe(logged=>this.logged=logged);
   }
-  private updateLogSystemFlag(url: string): void {
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: MouseEvent) {
+    const menuElement = document.querySelector('#navbar');
+    if (!menuElement?.contains(event.target as Node)) {
+      if (this.show) {
+        this.show = false;
+      }
+    }
+  }
+  updateLogSystemFlag(url: string): void {
     this.logSystem = url.includes("logSystem");
   }
   logout(){
@@ -35,4 +45,5 @@ export class NavbarComponent {
     if(this.value) this.router.navigate([`/search/${this.value}`]);
     this.counter=0;
   }
+
 }

@@ -13,7 +13,6 @@ import { ILogin } from '../../../interfaces/irequest';
 export class LoginComponent {
   form!:FormGroup
   input:string="password";
-  eye:boolean=false;
   loading:boolean=false;
   regEx=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   notFound:boolean=false;
@@ -38,7 +37,6 @@ export class LoginComponent {
   }
 
   switch():void{
-    this.eye=!this.eye;
     if(this.input=="password") this.input="text"
     else this.input="password";
   }
@@ -72,7 +70,7 @@ export class LoginComponent {
   isTouched(nameForm:string):boolean|undefined{
     return this.form.get(nameForm)?.touched
   }
-  isValidAndTouched(nameForm:string):boolean|undefined{
+  isNotValidAndTouched(nameForm:string):boolean|undefined{
     return !this.isValid(nameForm) && this.isTouched(nameForm)
   }
 }

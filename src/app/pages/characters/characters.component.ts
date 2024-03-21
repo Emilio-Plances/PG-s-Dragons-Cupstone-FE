@@ -44,4 +44,9 @@ export class CharactersComponent {
     event.stopPropagation();
     this.cs.delete(id).subscribe(()=> this.characters=this.characters.filter(el=>el.id != id));
   }
+  printClass(char:ICharacter):string{
+    if(char.pgClass.length==0) return 'None';
+    if(!char.pgClass[1]) return char.pgClass[0];
+    return char.pgClass.toString();
+  }
 }

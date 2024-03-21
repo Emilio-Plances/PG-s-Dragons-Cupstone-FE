@@ -4,6 +4,7 @@ import { environment } from '../../environments/environment.development';
 import { Observable } from 'rxjs';
 import { ISpellList } from '../interfaces/iresponselist';
 import { ISpellResponse } from '../interfaces/iresponses';
+import { Classes } from '../interfaces/enum';
 
 
 
@@ -25,7 +26,10 @@ export class SpellService {
   searchByName(name:string):Observable<ISpellList>{
     return this.http.get<ISpellList>(`${this.spellURL}/name?name=${name}`);
   }
-  getSingleById(id:number):Observable<ISpellResponse>{
+  getById(id:number):Observable<ISpellResponse>{
     return this.http.get<ISpellResponse>(`${this.spellURL}/${id}`)
+  }
+  getByClass(pgClass:Classes):Observable<ISpellList>{
+    return this.http.get<ISpellList>(`${this.spellURL}/class?pgClass=${pgClass}`);
   }
 }

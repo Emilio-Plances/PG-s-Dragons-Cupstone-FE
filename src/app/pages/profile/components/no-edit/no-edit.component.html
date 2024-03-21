@@ -1,13 +1,13 @@
 <div class="text-center mt-3">
   <img id="profile-photo" class="rounded-circle" [src]="user?.linkPhoto? user?.linkPhoto:'../../../assets/images/user-missing.png'" alt="Profile Photo" />
-  <div id="username">{{ user?.publicUsername }}</div>
+  <div id="username" class="text-red">{{ user?.publicUsername }}</div>
 </div>
 
 <div class="m-4">
-  <p><span>Real username:</span> {{ user?.username }}</p>
-  <p><span>Name:</span> {{ user?.name }}</p>
-  <p><span>Surname:</span> {{ user?.surname }}</p>
-  <p><span>Birthday:</span> {{ user?.birthday }}</p>
-  <p><span>Email:</span> {{ user?.email }}</p>
-  <p><span>Info:</span> {{user?.info ? user?.info: "No info"}}</p>
+  <p><span class="text-red">Real username:</span> {{ user?.username }}</p>
+  <p><span class="text-red">Name:</span> {{ user?.name }}</p>
+  <p><span class="text-red">Surname:</span> {{ user?.surname }}</p>
+  <p><span class="text-red">Birthday:</span> {{ user?.birthday }}</p>
+  <p><span class="text-red">Email:</span> {{ user?.email }}</p>
+  <p><span class="text-red">Info:</span> {{user?.info ? user?.info: "No info"}}</p>
 </div>

@@ -1,17 +1,22 @@
-div{
-  box-sizing: border-box;
+@import "../../../colors";
+#navbar,#menu-button{
+  background-color: $myGrey;
+  border:none
 }
-#home{
-  border-right: 1px solid black;
+#menu{
+  color:$myRed;
+  font-size:2em;
+  font-weight:bold;
 }
-#links{
-  border: 1px solid grey;
+#logo{
+  width: 150px;
 }
 .link{
   height:30px;
   line-height:30px;
-  color:black;
+  color:$myRed;
   text-decoration: none;
+  font-weight:bold
 }
 #login-ball{
   cursor: pointer;
@@ -24,6 +29,8 @@ div{
   bottom:10px;
   font-size: 1.5em;
   z-index: 2;
+  background-color: $myGrey;
+  color:$myRed;
 }
 .dropdown-toggle::after {
   display: none;
@@ -32,3 +39,12 @@ div{
   transform-origin: right top;
   transform: translateX(-75%);
 }
+.height-0{
+  overflow: hidden;
+  transition: height 0.7s ease;
+  height: 0px;
+}
+.showHeight{
+  height: 125px;
+}
+

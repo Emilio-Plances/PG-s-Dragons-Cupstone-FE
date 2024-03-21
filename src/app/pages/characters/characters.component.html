@@ -1,7 +1,7 @@
 
 <div [routerLink]="['/characters/noEdit',char.id]" *ngFor="let char of characters" class="border border-primary">
   <p>Name: {{char.name?char.name: 'None'}}</p>
-  <p>Class: {{char.pgClass.length!=0?char.pgClass: 'None'}}</p>
+  <p>Class: {{printClass(char)}}</p>
 
   <div class="d-flex justify-content-between">
     <button class="btn btn-danger" (click)="deleteChar(char.id,$event)">Delete</button>

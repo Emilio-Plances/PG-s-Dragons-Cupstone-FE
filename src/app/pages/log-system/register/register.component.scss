@@ -1,16 +1,16 @@
-.password-div{
-  position:relative;
-}
-.eyes{
-  background-color: transparent;
-  border:none;
-  position:absolute;
-  right: -3px;
-  top:-28px;
-  font-size:1.3em
-}
+@import "../../../../colors";
 .form-control {
   &:focus, &:focus-visible {
     box-shadow: none;
   }
+}
+#submit{
+  background-color: $myGrey;
+  color:$myRed;
+}
+.error-message{
+  font-size: 12px;
+}
+input{
+  background-color: rgb(207 207 207);
 }

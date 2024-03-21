@@ -28,12 +28,12 @@ export enum Status{
   Private="Private"
 }
 export enum Dice{
-  D4=4,
-  D6=6,
-  D8=8,
-  D10=10,
-  D12=12,
-  D20=20
+  D4="D4",
+  D6="D6",
+  D8="D8",
+  D10="D10",
+  D12="D12",
+  D20="D20"
 }
 export enum Race{
   null="null",

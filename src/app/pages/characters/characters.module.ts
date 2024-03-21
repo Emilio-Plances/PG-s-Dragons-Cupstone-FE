@@ -7,6 +7,7 @@ import { NoEditComponent } from './components/no-edit/no-edit.component';
 import { StatsComponent } from './components/no-edit/stats/stats.component';
 
 import { FormsModule } from '@angular/forms';
+import Swal from 'sweetalert2';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,9 @@ import { FormsModule } from '@angular/forms';
     CommonModule,
     CharactersRoutingModule,
     FormsModule
+  ],
+  providers: [
+    { provide: 'Swal', useValue: Swal }
   ]
 })
 export class CharactersModule { }
