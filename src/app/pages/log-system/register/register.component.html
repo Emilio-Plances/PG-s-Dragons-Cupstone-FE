@@ -81,8 +81,8 @@
       <input class="form-control rounded" id="confirm-password" [type]="input2" formControlName="confirmPassword" placeholder="Enter password"
       [ngClass]="{'is-invalid': isNotValidAndTouched('confirmPassword')}" tabindex="7">
       <div class="ms-1">
-        <span class="input-group-text eye bgg-cr" (click)="switch1()">
-          <i class="bi bi-eye-fill" [ngClass]="{'bi-eye': input1 === 'password', 'bi-eye-fill': input1 === 'text'}"></i>
+        <span class="input-group-text eye bgg-cr" (click)="switch2()">
+          <i class="bi bi-eye-fill" [ngClass]="{'bi-eye': input2 === 'password', 'bi-eye-fill': input2 === 'text'}"></i>
         </span>
       </div>
     </div>

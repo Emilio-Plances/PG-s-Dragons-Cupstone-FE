@@ -11,12 +11,16 @@ import { LogService } from './pages/log-system/service/log.service';
 import { DefaultInterceptor } from './interceptors/default.interceptor';
 import { FormsModule } from '@angular/forms';
 import { Page404Component } from './components/page404/page404.component';
+import { MobileComponent } from './components/navbar/components/mobile/mobile.component';
+import { DesktopComponent } from './components/navbar/components/desktop/desktop.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     Page404Component,
+    MobileComponent,
+    DesktopComponent,
   ],
   imports: [
     BrowserModule,
