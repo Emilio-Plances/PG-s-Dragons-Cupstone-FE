@@ -10,14 +10,14 @@
         <li class="me-2"><a class="link" routerLink="/">Preferred</a></li>
         <li class="me-2"><a class="link" routerLink="/">Helps</a></li>
       </ul>
-      <div class="ms-3">
+    </div>
+    <div class="text-red d-flex align-items-center">
+      <div class="me-3">
         <input class="form-control m-0" (input)="search()" type="search" placeholder="Search" aria-label="Search" [(ngModel)]="value" name="search">
         <button class="d-none" type="submit" (click)="search()"><i class="bi bi-search"></i></button>
       </div>
-    </div>
-    <div class="text-red">
-      <a class="nav-link" *ngIf="!logged" routerLink="/logSystem/login"><i class="user bi bi-person"></i></a>
-      <div *ngIf="logged" ngbDropdown placement="top-start">
+      <a class="nav-link d-block" *ngIf="!logged" routerLink="/logSystem/login"><i class="user bi bi-person"></i></a>
+      <div *ngIf="logged" ngbDropdown placement="bottom-start">
         <div class="rounded-circle" id="dropdownBasic2" ngbDropdownToggle><i class="user bi bi-person-fill"></i></div>
         <div id="dropdown" ngbDropdownMenu aria-labelledby="dropdownBasic2">
           <a (click)="logout()" ngbDropdownItem>Logout</a>

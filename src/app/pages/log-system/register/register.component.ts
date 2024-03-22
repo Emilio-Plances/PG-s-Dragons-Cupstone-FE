@@ -18,6 +18,7 @@ export class RegisterComponent {
   loading:boolean=false;
   regEx: string=`^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()\-_=+{};:,<.>])(?=.*[^\s]).{8,}$`;
   checking:boolean=false;
+  capsLockActive: boolean = false;
 
   minNumberMessage="Too short (min 3)";
   maxNumberMessage="Too long (max 15)";
@@ -28,6 +29,7 @@ export class RegisterComponent {
     private ls:LogService,
     private router:Router
   ){}
+
   ngOnInit(){
     this.form=this.fb.group({
       name:[null,[Validators.required, Validators.minLength(3),Validators.maxLength(15)]],
@@ -74,6 +76,13 @@ export class RegisterComponent {
       return null;
     })
   )}
+  checkCapsLock(event: KeyboardEvent) {
+    if (event.getModifierState && event.getModifierState('CapsLock')) {
+      this.capsLockActive = true;
+    } else {
+      this.capsLockActive = false;
+    }
+  }
   switch1():void{
     if(this.input1=="password") this.input1="text";
     else this.input1="password";

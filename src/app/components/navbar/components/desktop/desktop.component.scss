@@ -25,4 +25,10 @@ li{
 .user{
   font-size: 30px;
 }
-
+#dropdown{
+  transform-origin: right top;
+  transform: translate(-72%,13%);
+}
+.dropdown-toggle::after {
+  display: none;
+}

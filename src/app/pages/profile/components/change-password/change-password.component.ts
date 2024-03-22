@@ -24,6 +24,7 @@ export class ChangePasswordComponent {
   wrong!:boolean;
   anotherProblem!:boolean;
   emptyMessage="Can't be empty";
+  capsLockActive: boolean = false;
 
   constructor(
     private fb:FormBuilder,
@@ -40,6 +41,13 @@ export class ChangePasswordComponent {
       newPassword: [null,[Validators.required,Validators.pattern(this.regEx),this.passwordDontMatchValidator]],
       confirmNewPassword: [null,[Validators.required,this.passwordMatchValidator]]
     })
+  }
+  checkCapsLock(event: KeyboardEvent) {
+    if (event.getModifierState && event.getModifierState('CapsLock')) {
+      this.capsLockActive = true;
+    } else {
+      this.capsLockActive = false;
+    }
   }
   passwordDontMatchValidator=(formC:FormControl):ValidationErrors|null=>{
     if(formC.value== this.form?.get(`oldPassword`)?.value){

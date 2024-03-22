@@ -1,4 +1,5 @@
-<form class="mt-3" [formGroup]="form">
+<form class="w-100" [formGroup]="form">
+  <h2 class="text-center text-red">REGISTER</h2>
   <div class="mt-2">
     <label class="fw-bold text-red" for="name">Name *</label>
     <input class="form-control" type="text" id="name" formControlName="name" placeholder="Enter name"
@@ -9,7 +10,6 @@
       <p class="m-0" *ngIf="!form.get('name')?.hasError('maxlength')&&!form.get('name')?.hasError('minlength')">{{emptyMessage}}</p>
     </div>
   </div>
-
   <div class="mt-2">
     <label class="fw-bold text-red" for="surname">Surname *</label>
     <input class="form-control" type="text" id="surname" formControlName="surname" placeholder="Enter surname"
@@ -20,7 +20,6 @@
       <p class="m-0" *ngIf="!form.get('surname')?.hasError('maxlength')&&!form.get('surname')?.hasError('minlength')">{{emptyMessage}}</p>
     </div>
   </div>
-
   <div class="mt-2">
     <label class="fw-bold text-red" for="username">Username *</label>
     <input class="form-control" type="text" id="username" formControlName="username" placeholder="Enter username"
@@ -32,7 +31,6 @@
       <p class="m-0" *ngIf="getCustomMessage('username')==null&&!form.get('username')?.hasError('maxlength')&&!form.get('username')?.hasError('minlength')">{{emptyMessage}}</p>
     </div>
   </div>
-
   <div class="mt-2">
     <label class="fw-bold text-red" for="email">Email *</label>
     <input class="form-control" type="text" id="email" formControlName="email" placeholder="Enter email"
@@ -43,19 +41,18 @@
       <p class="m-0" *ngIf="getCustomMessage('email')==null&&!form.get('email')?.hasError('email')">{{emptyMessage}}</p>
     </div>
   </div>
-
   <div class="mt-2">
     <label class="fw-bold text-red" for="birthday">Birthday</label>
     <input class="form-control" type="date" id="birthday" formControlName="birthday" tabindex="5">
   </div>
-
   <div class="mt-2">
     <label class="fw-bold text-red" for="password">Password *</label>
     <div class="password-div input-group">
       <input class="form-control rounded" id="password" [type]="input1" formControlName="password" placeholder="Enter password"
-      [ngClass]="{'is-invalid': isNotValidAndTouched('password')}" tabindex="6">
+      [ngClass]="{'is-invalid': isNotValidAndTouched('password')}" tabindex="6" (keydown)="checkCapsLock($event)">
       <div class="ms-1">
         <span id="eye" class="input-group-text bgg-cr" (click)="switch1()">
+          <i id="caps" *ngIf="capsLockActive" class="bi bi-capslock-fill"></i>
           <i class="bi bi-eye-fill" [ngClass]="{'bi-eye': input1 === 'password', 'bi-eye-fill': input1 === 'text'}"></i>
         </span>
       </div>
@@ -74,14 +71,14 @@
     </div>
     <p class="m-0" *ngIf="!form.get('password')?.hasError('pattern')">{{emptyMessage}}</p>
   </div>
-
   <div class="mt-2">
     <label class="fw-bold text-red" for="confirm-password">Confirm Password *</label>
     <div class="password-div input-group">
       <input class="form-control rounded" id="confirm-password" [type]="input2" formControlName="confirmPassword" placeholder="Enter password"
-      [ngClass]="{'is-invalid': isNotValidAndTouched('confirmPassword')}" tabindex="7">
+      [ngClass]="{'is-invalid': isNotValidAndTouched('confirmPassword')}" tabindex="7" (keydown)="checkCapsLock($event)">
       <div class="ms-1">
         <span class="input-group-text eye bgg-cr" (click)="switch2()">
+          <i id="caps" *ngIf="capsLockActive" class="bi bi-capslock-fill"></i>
           <i class="bi bi-eye-fill" [ngClass]="{'bi-eye': input2 === 'password', 'bi-eye-fill': input2 === 'text'}"></i>
         </span>
       </div>
@@ -91,9 +88,9 @@
     <p class="m-0" *ngIf="getCustomMessage('confirmPassword')!=null">{{getCustomMessage('confirmPassword')}}</p>
     <p class="m-0" *ngIf="getCustomMessage('confirmPassword')==null">{{emptyMessage}}</p>
   </div>
-
   <div class="d-flex justify-content-between align-items-center mt-3">
     <p>You're signed up? <a routerLink="/logSystem/login" class="text-red">Log in</a></p>
     <button id="submit" class="btn btn-primary" (click)="submit()" [disabled]="!form.valid||loading">Sign up</button>
   </div>
 </form>
+

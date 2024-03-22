@@ -14,3 +14,16 @@
 input{
   background-color: rgb(207 207 207);
 }
+form{
+  margin: 1rem auto;
+  max-width: 600px;
+  @media (min-width:525px) {
+    margin: 100px auto;
+  }
+}
+#caps{
+  position: absolute;
+  top: 6px;
+  right: 80px;
+  z-index: 10;
+}

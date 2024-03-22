@@ -22,13 +22,20 @@ export class LoginComponent {
     email: null,
     password: ''
   }
+  capsLockActive: boolean = false;
 
   constructor(
     private fb:FormBuilder,
     private router:Router,
     private ls:LogService
   ){}
-
+  checkCapsLock(event: KeyboardEvent) {
+    if (event.getModifierState && event.getModifierState('CapsLock')) {
+      this.capsLockActive = true;
+    } else {
+      this.capsLockActive = false;
+    }
+  }
   ngOnInit(){
     this.form= this.fb.group({
       usernameEmail:[null,[Validators.required]],
