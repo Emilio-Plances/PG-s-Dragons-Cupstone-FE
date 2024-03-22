@@ -1,7 +1,10 @@
+@import "../../../colors";
 #delete{
   background-color: transparent;
   border:none;
   text-decoration: underline;
   padding:0
 }
-
+.btn-confirm-class{
+  color:$myRed;
+}

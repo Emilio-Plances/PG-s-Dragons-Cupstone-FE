@@ -1,10 +1,11 @@
-<form [formGroup]="form" class="text-right">
-  <div class="text-center mt-3 drop-area">
-    <label *ngIf="!linkFile" for="image"><img id="profile-photo" [src]="user?.linkPhoto? user?.linkPhoto:'../../../assets/images/user-missing.png'"></label>
-    <label *ngIf="linkFile" for="image"><img id="profile-photo" [src]="linkFile" ></label>
+<form [formGroup]="form" class="text-right mt-5">
+  <div class="text-center mt-3 position-relative mb-4">
+    <label class="pointer" *ngIf="!linkFile" for="image"><img id="profile-photo" [src]="user?.linkPhoto? user?.linkPhoto:'../../../assets/images/user-missing.png'"></label>
+    <label class="pointer" *ngIf="linkFile" for="image"><img id="profile-photo" [src]="linkFile" ></label>
+    <label id="pencil" for="image" class="text-red rounded-circle bg-grey pointer"><i class="bi bi-pencil-square"></i></label>
     <input class="form-control d-none" id="image" type="file" name="profile_photo" placeholder="Photo" formControlName="photo" capture (change)="onFileSelected($event)">
   </div>
-  <div id="public-username" class="mt-2">
+  <div id="public-username" class="mt-3">
     <input class="form-control text-center" type="text" formControlName="publicUsername"
     [ngClass]="{'is-invalid': isNotValidAndTouched('publicUsername')}" tabindex="1">
   </div>
@@ -31,5 +32,9 @@
     <label class="me-2" for="info">Info:</label>
     <textarea class="form-control" id="info" name="info" rows="4" cols="50" tabindex="6" formControlName="info"></textarea>
   </div>
-  <button id="confirm" (click)="save()" class="bg-success text-white" [disabled]="!form.valid||loading"><i class="bi bi-check-lg"></i></button>
+  <div class="d-flex justify-content-end mt-2">
+    <button (click)="save()" class="fw-bold btn text-red bg-grey desktop" [disabled]="!form.valid||loading">Save</button>
+  </div>
+
+  <button id="confirm" (click)="save()" class="text-red bg-grey mobile" [disabled]="!form.valid||loading"><i class="bi bi-check-lg"></i></button>
 </form>

@@ -7,9 +7,9 @@ import { NoEditComponent } from './components/no-edit/no-edit.component';
 
 
 const routes: Routes = [
-  { path: '', component: CharactersComponent, title: 'My characters',canActivate:[LogGuard] },
-  { path:'edit/:id', component: EditCharComponent, title: 'Edit',canActivate:[LogGuard] },
-  { path:'noEdit/:id', component: NoEditComponent, title: 'No Edit'}
+  { path: '', component: CharactersComponent, title: 'My characters | P&D',canActivate:[LogGuard] },
+  { path:'edit/:id', component: EditCharComponent, title: 'Edit | P&D',canActivate:[LogGuard] },
+  { path:'noEdit/:id', component: NoEditComponent, title: 'No Edit | P&D'}
 ];
 
 @NgModule({

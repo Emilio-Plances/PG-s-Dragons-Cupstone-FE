@@ -1,3 +1,4 @@
+@import "../../../../../colors";
 #profile-photo{
   height:100px;
   width:100px;
@@ -9,6 +10,7 @@
 }
 label{
   font-weight: bold;
+  color:$myRed
 }
 #confirm{
   text-align: center;
@@ -29,4 +31,15 @@ label{
 }
 input,textarea{
   background-color: rgb(207 207 207);
+}
+form{
+  margin:0 auto;
+  max-width: 300px;
+}
+#pencil{
+  position:absolute;
+  bottom: 0;
+  width:25px;
+  height: 25px;
+  right: 104px;
 }

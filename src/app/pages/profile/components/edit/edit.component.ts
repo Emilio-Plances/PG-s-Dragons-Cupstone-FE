@@ -105,6 +105,7 @@ export class EditComponent {
         this.ls.edit(this.auth).subscribe(()=>{
           this.swal.fire({
             position: "top-end",
+            iconColor:"#8b8b8b",
             icon: "success",
             title: `Account updated!`,
             showConfirmButton: false,

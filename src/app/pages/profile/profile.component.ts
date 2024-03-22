@@ -40,7 +40,12 @@ export class ProfileComponent {
       },
       showCancelButton: true,
       confirmButtonText: "Confirm",
+      confirmButtonColor: "#8b8b8b",
       showLoaderOnConfirm: true,
+      customClass: {
+        confirmButton: 'btn-confirm-class',
+        cancelButton: 'btn-cancel-class'
+      },
       preConfirm:(username:string)=>{
         if(username!=this.user?.username) this.wrongUsername();
         else this.deleteUser();
@@ -63,6 +68,7 @@ export class ProfileComponent {
       this.swal.fire({
         position: "top-end",
         icon: "success",
+        iconColor:"#8b8b8b",
         title: `Account deleted! See you next time ${this.user?.name}! We're sorry to see you're going!`,
         showConfirmButton: false,
         timer: 1500

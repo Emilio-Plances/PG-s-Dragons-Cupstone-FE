@@ -1,13 +1,15 @@
-<div class="text-center mt-3">
+<div class="text-center mt-5 ">
   <img id="profile-photo" class="rounded-circle" [src]="user?.linkPhoto? user?.linkPhoto:'../../../assets/images/user-missing.png'" alt="Profile Photo" />
   <div id="username" class="text-red">{{ user?.publicUsername }}</div>
 </div>
 
-<div class="m-4">
+<div id="info">
   <p><span class="text-red">Real username:</span> {{ user?.username }}</p>
   <p><span class="text-red">Name:</span> {{ user?.name }}</p>
   <p><span class="text-red">Surname:</span> {{ user?.surname }}</p>
   <p><span class="text-red">Birthday:</span> {{ user?.birthday }}</p>
   <p><span class="text-red">Email:</span> {{ user?.email }}</p>
   <p><span class="text-red">Info:</span> {{user?.info ? user?.info: "No info"}}</p>
+  <p class="desktop"><span class="text-red">Password: </span> <a class="text-grey" routerLink="/profile/changePassword">Change password</a></p>
+  <ng-content></ng-content>
 </div>

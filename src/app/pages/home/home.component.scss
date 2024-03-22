@@ -1,0 +1,12 @@
+img{
+  height: auto;
+  width:100vw;
+  @media (min-width:525px) {
+    display: none;
+  }
+}
+#home{
+  @media (min-width:525px) {
+  }
+  height:500px;
+}

@@ -26,3 +26,17 @@ body{
   color:$myRed;
   background-color:$myGrey;
 }
+.desktop{
+  display:none;
+  @media (min-width: 525px) {
+    display: block;
+  }
+}
+.mobile{
+  @media (min-width: 525px) {
+    display: none;
+  }
+}
+.pointer{
+  cursor: pointer;
+}
