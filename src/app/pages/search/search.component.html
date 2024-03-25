@@ -1,30 +1,46 @@
 <div class="container">
+  <!-- <app-filter (charactersEvent)="changeCharacters($event)" (usersEvent)="changeUsers($event)" (spellsEvent)="changeSpells($event)"></app-filter>
+  <app-order (orderNameDescEvent)="orderNameDesc()" (orderNameAscEvent)="ordernameAsc()"></app-order> -->
 
-  <app-filter (charactersEvent)="changeCharacters($event)" (usersEvent)="changeUsers($event)" (spellsEvent)="changeSpells($event)"></app-filter>
-
-  <app-order (orderNameDescEvent)="orderNameDesc()" (orderNameAscEvent)="ordernameAsc()"></app-order>
-
-  <div *ngIf="!filterType||boolCharacters">
-    <h3>Characters</h3>
-    BLOCCO DEI CHARACTERS
-  </div>
-
-  <div *ngIf="users.length!=0">
-    <div *ngIf="!filterType||boolUsers">
-      <h3>Users</h3>
-      <div class="border border-primary mb-2" *ngFor="let user of users">
-        <app-userblock [user]="user"></app-userblock>
+  <div *ngIf="charactersPage.length!=0" class="mt-3">
+    <div *ngIf="!filterType||boolCharacters" >
+      <h3 class="text-red fw-bold">Characters</h3>
+      <div>
+        <app-page-changer class="page-changer" [currentPage]="currentCharacterPage" [maxPages]="charactersMaxPage" (changePage)="changeCharactersPage($event)">
+          <div *ngFor="let char of charactersPage">
+            <app-characterblock [char]="char">
+              <div id="user" class="text-center mt-2">
+                <p class="m-0">Creator: <span class="fw-bold">{{char.user?.publicUsername}}</span></p>
+              </div>
+            </app-characterblock>
+          </div>
+        </app-page-changer>
       </div>
     </div>
   </div>
 
-  <div *ngIf="spells.length!=0">
-    <div *ngIf="!filterType||boolSpells">
-      <h3>Spells</h3>
+  <div *ngIf="usersPage.length!=0" class="mt-3">
+    <div *ngIf="!filterType||boolUsers">
+      <h3 class="text-red fw-bold">Users</h3>
       <div>
-        <div class="border border-primary mb-2" *ngFor="let spell of spells">
-          <app-spell-block [spell]="spell"></app-spell-block>
-        </div>
+        <app-page-changer class="page-changer" [currentPage]="currentUserPage" [maxPages]="usersMaxPage" (changePage)="changeUsersPage($event)">
+          <div class="mb-2" *ngFor="let user of usersPage">
+            <app-userblock [user]="user"></app-userblock>
+          </div>
+        </app-page-changer>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="spellsPage.length!=0" class="mt-3">
+    <div *ngIf="!filterType||boolSpells">
+      <h3 class="text-red fw-bold">Spells</h3>
+      <div>
+        <app-page-changer class="page-changer" [currentPage]="currentSpellPage" [maxPages]="spellsMaxPage" (changePage)="changeSpellsPage($event)">
+          <div class="mb-2" *ngFor="let spell of spellsPage">
+            <app-spell-block [spell]="spell"></app-spell-block>
+          </div>
+        </app-page-changer>
       </div>
     </div>
   </div>

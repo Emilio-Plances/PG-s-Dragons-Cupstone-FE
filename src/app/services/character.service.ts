@@ -22,6 +22,12 @@ export class CharacterService {
   getAll():Observable<ICharacterList>{
     return this.http.get<ICharacterList>(this.noLogcharacterURL);
   }
+  getPublic():Observable<ICharacterList>{
+    return this.http.get<ICharacterList>(`${this.noLogcharacterURL}/public`);
+  }
+  searchByName(name:string):Observable<ICharacterList>{
+    return this.http.get<ICharacterList>(`${this.noLogcharacterURL}/name?name=${name}`);
+  }
   getById(id:number):Observable<ICharacterResponse>{
     return this.http.get<ICharacterResponse>(`${this.noLogcharacterURL}/${id}`);
   }

@@ -10,3 +10,16 @@
   font-size: 1.5em;
   z-index: 2;
 }
+#delete{
+  background-color: transparent;
+  border:none;
+  text-decoration: underline;
+  padding:0
+}
+.box{
+  margin:0 5px;
+  font-size: 1em;
+  .buttons{
+    margin-top:24px
+  }
+}

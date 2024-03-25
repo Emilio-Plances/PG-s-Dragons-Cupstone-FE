@@ -7,7 +7,8 @@ import { CharacterService } from '../../../../services/character.service';
 import { ISpell } from '../../../../interfaces/ispell';
 import { SpellService } from '../../../../services/spell.service';
 import { LogService } from '../../../log-system/service/log.service';
-import { ISpellList } from '../../../../interfaces/iresponselist';
+import { IUser } from '../../../../interfaces/iuser';
+
 
 @Component({
   selector: 'app-edit-char',
@@ -29,29 +30,35 @@ export class EditCharComponent {
   spells:ISpell[]=[];
   spellLvl:number=0;
   filteredSpells:ISpell[]=[];
-  numberSpells!:number
-  cantrips!:number
+  numberSpells!:number;
+  cantrips!:number;
+  stop:boolean=false;
 
   constructor(
     @Inject('Swal') private swal: any,
     private route:ActivatedRoute,
     private cs:CharacterService,
     private ss:SpellService,
-    private router:Router
+    private router:Router,
+    private ls:LogService
   ){}
   ngOnInit(){
     this.route.paramMap.subscribe(params => {
       let idString:string|null = params.get('id');
       if (!idString) return;
       let id:number=parseInt(idString);
-
-      this.cs.getById(id).subscribe(data=>{
+        this.cs.getById(id).subscribe(data=>{
         this.char=data.response;
-        this.getSpells(this.char.pgClass[0]);
-        this.mod("str");  this.mod("dex");
-        this.mod("con");  this.mod("int");
-        this.mod("cha");  this.mod("wis");
-        this.setNumberSpell()
+        this.ls.user$.subscribe(auth=>{
+          if(auth?.user.id!=this.char.user?.id) this.stop=true
+          this.mod("str");  this.mod("dex");
+          this.mod("con");  this.mod("int");
+          this.mod("cha");  this.mod("wis");
+
+          if(this.char.pgClass[0]==null) return;
+          this.getSpells(this.char.pgClass[0]);
+          this.setNumberSpell()
+        })
         this.loading=false;
       })
     })
@@ -170,7 +177,7 @@ export class EditCharComponent {
       this.swal.fire({
         position: "top-end",
         icon: "success",
-        title: `Account updated!`,
+        title: `Character updated!`,
         showConfirmButton: false,
         timer: 1500
       }).then(()=>{

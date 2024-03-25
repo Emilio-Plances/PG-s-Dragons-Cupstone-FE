@@ -33,7 +33,7 @@
     </div>
   </div>
 
-  <div id="login-ball" *ngIf="!logSystem" class="rounded-circle text-center">
+  <div id="login-ball" *ngIf="!logSystem" class="rounded-circle text-center border-red">
     <a class="nav-link" *ngIf="!logged" routerLink="/logSystem/login"><i class="bi bi-person"></i></a>
     <div *ngIf="logged" ngbDropdown placement="top-start">
       <div class="rounded-circle" id="dropdownBasic2" ngbDropdownToggle><i class="bi bi-person-fill"></i></div>

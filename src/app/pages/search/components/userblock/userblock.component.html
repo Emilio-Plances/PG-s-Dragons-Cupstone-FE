@@ -1,9 +1,7 @@
-<div [routerLink]="['/profile/noEdit/'+user.id]" class="row align-items-center p-2">
+<div [routerLink]="['/profile/noEdit/'+user.id]" id="user-block" class="d-flex bg-grey align-items-center p-2 rounded">
+  <img class="rounded" [src]="user.linkPhoto? user.linkPhoto:'../../../assets/images/user-missing.png'" alt="profile Photo">
 
-  <img class="col-4" [src]="user.linkPhoto? user.linkPhoto:'../../../assets/images/user-missing.png'" alt="profile Photo">
-
-  <div class="col-8 text-right">
-    <p class="m-0">name:{{user.name}}</p>
-    <p class="m-0">username:{{user.publicUsername}}</p>
+  <div class="col-8 text-red text-center">
+    <p class="m-0 fw-bold">{{user.publicUsername}}</p>
   </div>
 </div>

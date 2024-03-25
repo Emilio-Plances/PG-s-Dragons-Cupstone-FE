@@ -1,12 +1,11 @@
 <div class="container">
-  <div [routerLink]="['/characters/noEdit',char.id]" *ngFor="let char of characters" class="border border-primary">
-    <p>Name: {{char.name?char.name: 'None'}}</p>
-    <p>Class: {{printClass(char)}}</p>
-
-    <div class="d-flex justify-content-between">
-      <button class="btn btn-danger" (click)="deleteChar(char.id,$event)">Delete</button>
-      <a class="btn btn-warning" [routerLink]="['/characters/edit',char.id]">Edit</a>
-    </div>
+  <div *ngFor="let char of characters">
+    <app-characterblock [char]="char">
+      <div id="buttons" class="d-flex buttons mt-2 justify-content-center text-center">
+        <button id="delete" (click)="deleteChar(char.id,$event)" class="text-red text-center"><i class="bi bi-trash3"></i></button>
+        <a id="edit" class="btn bg-grey text-red text-center ms-1" [routerLink]="['/characters/edit',char.id]"><i class="bi bi-pencil"></i></a>
+      </div>
+    </app-characterblock>
   </div>
   <div id="add-char" (click)="addChar($event)" class="rounded-circle bg-grey text-red text-center">
     <i class="bi bi-plus-circle"></i>

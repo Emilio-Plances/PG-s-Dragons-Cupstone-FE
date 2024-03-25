@@ -1,28 +1,28 @@
-<form class="container" *ngIf="!loading">
+<form class="container mt-3" *ngIf="!loading&&!stop">
   <div class="row justify-content-evenly align-items-center">
-    <div class="d-flex align-items-center col-8">
+    <div class="d-flex align-items-center col-7 pe-0">
       <label for="name">Name:</label>
-      <input class="ms-2 form-control" id="name" type="text" name="name" [(ngModel)]="char.name">
+      <input class="m-1 form-control pe-0" id="name" type="text" name="name" [(ngModel)]="char.name">
     </div>
-    <div class="form-check-reverse  form-switch col-4 ">
+    <div class="form-check-reverse form-switch col-4">
       <label class="form-check-label"  for="flexSwitchCheckReverse">{{char.status}}</label>
       <input [checked]="char.status=='Public'" class="form-check-input" type="checkbox" (change)="changeStatus()" role="switch" id="flexSwitchCheckDefault" name="status">
     </div>
   </div>
 
-  <div class="d-flex justify-content-between mt-3">
-    <p class="m-0">HP: {{char.hp}}</p>
+  <div class="d-flex justify-content-between mt-3 text-center">
+    <p *ngIf="char.hp" class="m-0">HP: {{char.hp}}</p>
     <p *ngIf="char.dice" class="m-0">Dice: {{char.dice}}</p>
   </div>
 
-  <div class="row">
-    <div class="d-flex align-items-center mt-2 col-6">
+  <div>
+    <div class="d-flex align-items-center mt-2">
       <label for="race">Race:</label>
       <select class="ms-2 form-control" name="race" id="race" [(ngModel)]="char.race">
         <option *ngFor="let race of races" [hidden]="race=='null'" [disabled]="race=='null'" [selected]="race=='null'" [value]="race">{{race.replace("_"," ").replace("null","None")}}</option>
       </select>
     </div>
-    <div class="d-flex align-items-center mt-2 col-6">
+    <div class="d-flex align-items-center mt-2">
       <label for="pgClass">Class:</label>
       <select class="ms-2 form-control" name="pgClass" id="pgClass" (change)="setClass()" [(ngModel)]="char.pgClass[0]">
         <option *ngFor="let class of classes" [hidden]="class=='null'" [disabled]="class=='null'" [selected]="class=='null'" [value]="class">{{class.replace("_"," ").replace("null","None")}}</option>
@@ -80,3 +80,4 @@
   </div>
   <button id="confirm" (click)="save()" class="bg-success text-white" [disabled]="loading"><i class="bi bi-check-lg"></i></button>
 </form>
+<div *ngIf="stop">You can't edit this character!</div>

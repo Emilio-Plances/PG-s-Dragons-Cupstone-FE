@@ -1,18 +1,17 @@
-<div class="mt-2">
-  <h2>{{spell.name}}</h2>
-  <p>Classes: {{spell.pgClassList}}</p>
-  <p>School: {{spell.school}}</p>
-  <p>Level: {{spell.level}}</p>
-  <p>Components: [
+<div class="container mt-2">
+  <h2 class="text-red">{{spell.name}}</h2>
+  <p><span class="text-red">Classes:</span> {{spell.pgClassList}}</p>
+  <p><span class="text-red">School:</span> {{spell.school}}</p>
+  <p><span class="text-red">Level:</span> {{spell.level}}</p>
+  <p><span class="text-red">Components:</span> [
     <i *ngIf="spell.components[0]">V</i>
     <i *ngIf="spell.components[1]">S</i>
-    <i *ngIf="spell.components[2]">M</i>
-    ]
+    <i *ngIf="spell.components[2]">M</i> ]
   </p>
 
-  <p *ngIf="spell.materialCost.length!=0">Materials: {{spell.materialCost}}</p>
-  <p>castTime: {{spell.castTime}}</p>
-  <p>range: {{spell.range}}</p>
-  <p>duration: {{spell.duration}}</p>
+  <p *ngIf="spell.materialCost.length!=0"><span class="text-red">Materials:</span> {{spell.materialCost}}</p>
+  <p><span class="text-red">CastTime:</span> {{spell.castTime}}</p>
+  <p><span class="text-red">Range:</span> {{spell.range}}</p>
+  <p><span class="text-red">Duration:</span> {{spell.duration}}</p>
   <p>{{spell.description}}</p>
 </div>

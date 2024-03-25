@@ -1,0 +1,16 @@
+#navbar{
+  position:sticky;
+  top:0px;
+  z-index:100;
+}
+#navbar-mobile{
+  @media (min-width: 700px) {
+    display:none
+  }
+}
+#navbar-desktop{
+  display: none;
+  @media (min-width: 700px) {
+    display:block;
+  }
+}

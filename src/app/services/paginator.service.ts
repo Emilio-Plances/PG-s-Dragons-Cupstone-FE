@@ -9,4 +9,7 @@ export class PaginatorService {
     const endIndex = startIndex + itemsPerPage;
     return data.slice(startIndex, endIndex);
   }
+  maxPages(data: any[], itemsPerPage: number):number{
+    return Math.ceil(data.length/itemsPerPage);
+  }
 }
