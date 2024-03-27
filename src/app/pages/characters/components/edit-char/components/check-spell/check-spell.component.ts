@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Inject, Input, Output } from '@angular/core';
-import { ISpell } from '../../../../../interfaces/ispell';
+import { ISpell } from '../../../../../../interfaces/ispell';
 
 @Component({
   selector: 'app-check-spell',

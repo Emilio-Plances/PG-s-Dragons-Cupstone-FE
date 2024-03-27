@@ -15,7 +15,7 @@ import { IPutCharacterRequest } from '../../../../interfaces/irequest';
   styleUrl: './edit-char.component.scss'
 })
 export class EditCharComponent {
-
+  isCollapsed:boolean=true;
   char!:ICharacter;
   loading:boolean=true;
   races:Race[]=Object.values(Race);
@@ -38,6 +38,7 @@ export class EditCharComponent {
   timeout!:any;
   spellsId!:number[];
   request!:IPutCharacterRequest;
+  selectedSpells!:ISpell[]
 
   constructor(
     @Inject('Swal') private swal: any,
@@ -67,7 +68,8 @@ export class EditCharComponent {
           this.mod("str");  this.mod("dex");
           this.mod("con");  this.mod("int");
           this.mod("cha");  this.mod("wis");
-          this.getSpellsId()
+          this.selectedSpells=this.char.spells;
+          this.getSpellsId();
           if(this.char.pgClass[0]==null) return;
           this.getSpells(this.char.pgClass[0]);
           this.setNumberSpell()
@@ -195,21 +197,27 @@ export class EditCharComponent {
       return spell.id;
     });
   }
-  cantripAction(event:number) {
-    if(this.spellsId.some(el=>el==event)) {
-      this.spellsId=this.spellsId.filter(el=>el!=event);
+  cantripAction(id:number) {
+    if(this.spellsId.some(el=>el==id)) {
+      this.spellsId=this.spellsId.filter(el=>el!=id);
+      this.selectedSpells=this.selectedSpells.filter(el=>el.id!=id);
       this.cantrips--;
     } else {
-      this.spellsId.push(event);
+      this.spellsId.push(id);
+      let spell:ISpell|undefined=this.spells.find(el=>el.id==id)
+      if(spell) this.selectedSpells.push(spell);
       this.cantrips++;
     }
   }
-  spellAction(event:number) {
-    if(this.spellsId.some(el=>el==event)){
-      this.spellsId=this.spellsId.filter(el=>el!=event);
+  spellAction(id:number) {
+    if(this.spellsId.some(el=>el==id)){
+      this.spellsId=this.spellsId.filter(el=>el!=id);
+      this.selectedSpells=this.selectedSpells.filter(el=>el.id!=id);
       this.numberSpells--;
     } else{
-      this.spellsId.push(event);
+      this.spellsId.push(id);
+      let spell:ISpell|undefined=this.spells.find(el=>el.id==id)
+      if(spell) this.selectedSpells.push(spell);
       this.numberSpells++;
     }
   }

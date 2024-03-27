@@ -1,3 +1,4 @@
+@import "../../../../../colors";
 #confirm{
   text-align: center;
   line-height: 36px;
@@ -10,6 +11,13 @@
   z-index: 3;
   border-radius: 50%;
   border:none
+}
+#my-spells-button{
+  &:hover{
+    background-color: $myGrey;
+    color:$myRed
+
+  }
 }
 #spell-div{
   max-height:250px;

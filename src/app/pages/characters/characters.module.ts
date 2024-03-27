@@ -9,7 +9,8 @@ import { StatsComponent } from './components/no-edit/stats/stats.component';
 import { FormsModule } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { SharedModule } from '../../shared/shared.module';
-import { CheckSpellComponent } from './components/edit-char/check-spell/check-spell.component';
+import { CheckSpellComponent } from './components/edit-char/components/check-spell/check-spell.component';
+import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { CheckSpellComponent } from './components/edit-char/check-spell/check-sp
     CommonModule,
     CharactersRoutingModule,
     FormsModule,
-    SharedModule
+    SharedModule,
+    NgbCollapseModule
   ],
   providers: [
     { provide: 'Swal', useValue: Swal }
