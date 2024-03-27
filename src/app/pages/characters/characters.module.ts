@@ -9,6 +9,7 @@ import { StatsComponent } from './components/no-edit/stats/stats.component';
 import { FormsModule } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { SharedModule } from '../../shared/shared.module';
+import { CheckSpellComponent } from './components/edit-char/check-spell/check-spell.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { SharedModule } from '../../shared/shared.module';
     EditCharComponent,
     NoEditComponent,
     StatsComponent,
+    CheckSpellComponent,
   ],
   imports: [
     CommonModule,

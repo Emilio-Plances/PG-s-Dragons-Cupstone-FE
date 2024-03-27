@@ -1,3 +1,5 @@
+import { ICharacter } from "./i-character";
+
 export interface IRegister {
   name:string,
   surname:string
@@ -17,4 +19,7 @@ export interface ILogin {
 }
 export interface ICharacterRequest{
   userId:number
+}
+export interface IPutCharacterRequest extends ICharacter {
+  spellsId:number[],
 }

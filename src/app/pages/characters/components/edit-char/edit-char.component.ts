@@ -1,4 +1,4 @@
-import { Background, Alignment, Classes } from './../../../../interfaces/enum';
+import { Classes } from './../../../../interfaces/enum';
 import { Component, Inject } from '@angular/core';
 import { ICharacter } from '../../../../interfaces/i-character';
 import { Dice, Race, Status } from '../../../../interfaces/enum';
@@ -7,8 +7,7 @@ import { CharacterService } from '../../../../services/character.service';
 import { ISpell } from '../../../../interfaces/ispell';
 import { SpellService } from '../../../../services/spell.service';
 import { LogService } from '../../../log-system/service/log.service';
-import { IUser } from '../../../../interfaces/iuser';
-
+import { IPutCharacterRequest } from '../../../../interfaces/irequest';
 
 @Component({
   selector: 'app-edit-char',
@@ -16,6 +15,7 @@ import { IUser } from '../../../../interfaces/iuser';
   styleUrl: './edit-char.component.scss'
 })
 export class EditCharComponent {
+
   char!:ICharacter;
   loading:boolean=true;
   races:Race[]=Object.values(Race);
@@ -30,9 +30,14 @@ export class EditCharComponent {
   spells:ISpell[]=[];
   spellLvl:number=0;
   filteredSpells:ISpell[]=[];
-  numberSpells!:number;
-  cantrips!:number;
+  totalNumberSpells!:number;
+  totalCantrips!:number;
+  numberSpells:number=0;
+  cantrips:number=0;
   stop:boolean=false;
+  timeout!:any;
+  spellsId!:number[];
+  request!:IPutCharacterRequest;
 
   constructor(
     @Inject('Swal') private swal: any,
@@ -40,7 +45,7 @@ export class EditCharComponent {
     private cs:CharacterService,
     private ss:SpellService,
     private router:Router,
-    private ls:LogService
+    private ls:LogService,
   ){}
   ngOnInit(){
     this.route.paramMap.subscribe(params => {
@@ -50,15 +55,23 @@ export class EditCharComponent {
         this.cs.getById(id).subscribe(data=>{
         this.char=data.response;
         this.ls.user$.subscribe(auth=>{
-          if(auth?.user.id!=this.char.user?.id) this.stop=true
+          if(!auth) return;
+          if(auth?.user.id!=this.char.user?.id) {
+            this.stop=true
+            this.swal.fire({
+              icon: "error",
+              title: "Oops...",
+              text: "You can't stay here!",
+            }).then(()=>this.router.navigate(['']));
+          }
           this.mod("str");  this.mod("dex");
           this.mod("con");  this.mod("int");
           this.mod("cha");  this.mod("wis");
-
+          this.getSpellsId()
           if(this.char.pgClass[0]==null) return;
           this.getSpells(this.char.pgClass[0]);
           this.setNumberSpell()
-        })
+        });
         this.loading=false;
       })
     })
@@ -109,32 +122,32 @@ export class EditCharComponent {
       case Classes.Rogue:
       case Classes.Paladin:
       case Classes.Ranger:
-        this.numberSpells=0;
-        this.cantrips=0;
+        this.totalNumberSpells=0;
+        this.totalCantrips=0;
         break;
       case Classes.Bard:
-        this.numberSpells=4;
-        this.cantrips=2;
+        this.totalNumberSpells=4;
+        this.totalCantrips=2;
         break;
       case Classes.Cleric:
-        this.numberSpells=1+this.modCha;
-        this.cantrips=3;
+        this.totalNumberSpells=1+this.modCha;
+        this.totalCantrips=3;
         break;
       case Classes.Druid:
-        this.numberSpells=1+this.modWis;
-        this.cantrips=2;
+        this.totalNumberSpells=1+this.modWis;
+        this.totalCantrips=2;
         break;
       case Classes.Sorcerer:
-        this.numberSpells=1+this.modInt;
-        this.cantrips=3;
+        this.totalNumberSpells=1+this.modInt;
+        this.totalCantrips=3;
         break;
       case Classes.Wizard:
-        this.numberSpells=2;
-        this.cantrips=4;
+        this.totalNumberSpells=2;
+        this.totalCantrips=4;
         break;
       case Classes.Warlock:
-        this.numberSpells=2;
-        this.cantrips=2;
+        this.totalNumberSpells=2;
+        this.totalCantrips=2;
         break;
     }
   }
@@ -172,8 +185,47 @@ export class EditCharComponent {
         break;
     }
   }
+  filter():void{
+    this.filteredSpells= this.spells.filter(el=>el.level==this.spellLvl);
+  }
+  getSpellsId(){
+    this.spellsId= this.char.spells.map(spell=>{
+      if(spell.level==0) this.cantrips++;
+      else this.numberSpells++;
+      return spell.id;
+    });
+  }
+  cantripAction(event:number) {
+    if(this.spellsId.some(el=>el==event)) {
+      this.spellsId=this.spellsId.filter(el=>el!=event);
+      this.cantrips--;
+    } else {
+      this.spellsId.push(event);
+      this.cantrips++;
+    }
+  }
+  spellAction(event:number) {
+    if(this.spellsId.some(el=>el==event)){
+      this.spellsId=this.spellsId.filter(el=>el!=event);
+      this.numberSpells--;
+    } else{
+      this.spellsId.push(event);
+      this.numberSpells++;
+    }
+  }
   save():void{
-    this.cs.edit(this.char).subscribe(() =>{
+    if(this.cantrips>this.totalCantrips||this.numberSpells>this.totalNumberSpells){
+      this.swal.fire({
+        position: "top-end",
+        icon: "error",
+        title: `Can't save! You must respect spell limits!`,
+        showConfirmButton: false,
+        timer: 2000
+      })
+      return
+    }
+    this.request={...this.char,spellsId: this.spellsId};
+    this.cs.edit(this.request).subscribe(() =>{
       this.swal.fire({
         position: "top-end",
         icon: "success",
@@ -182,11 +234,7 @@ export class EditCharComponent {
         timer: 1500
       }).then(()=>{
         this.router.navigate(['/characters'])
-    })
+      })
     })
   }
-  filter():void{
-    this.filteredSpells= this.spells.filter(el=>el.level==this.spellLvl);
-  }
-
 }

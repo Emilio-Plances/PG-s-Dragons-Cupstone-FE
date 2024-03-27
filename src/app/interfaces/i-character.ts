@@ -29,3 +29,4 @@ export interface ICharacter {
   skills:Skill[],
   preferredUsers:IUser[]
 }
+

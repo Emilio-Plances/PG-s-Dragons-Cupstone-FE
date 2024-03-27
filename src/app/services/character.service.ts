@@ -4,8 +4,7 @@ import { Observable } from 'rxjs';
 import { ICharacterResponse } from '../interfaces/iresponses';
 import { environment } from '../../environments/environment.development';
 import { ICharacterList } from '../interfaces/iresponselist';
-import { ICharacterRequest } from '../interfaces/irequest';
-import { ICharacter } from '../interfaces/i-character';
+import { ICharacterRequest, IPutCharacterRequest } from '../interfaces/irequest';
 
 
 @Injectable({
@@ -34,7 +33,7 @@ export class CharacterService {
   getByUserId(userId:number):Observable<ICharacterList>{
     return this.http.get<ICharacterList>(`${this.logCharacterURL}/${userId}/getChar`)
   }
-  edit(char:ICharacter):Observable<ICharacterResponse>{
+  edit(char:IPutCharacterRequest):Observable<ICharacterResponse>{
     return this.http.put<ICharacterResponse>(`${this.logCharacterURL}/${char.id}`,char)
   }
   create(newChar:ICharacterRequest):Observable<ICharacterResponse>{

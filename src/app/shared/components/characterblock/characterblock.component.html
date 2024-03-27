@@ -1,6 +1,6 @@
-<div [routerLink]="['/characters/noEdit',char.id]" class="box d-flex rounded bg-grey text-red p-2 justify-content-between">
+<div [routerLink]="['/characters/noEdit',char.id]" class="box d-flex rounded bg-grey text-red p-2 justify-content-between mt-3 mb-2">
   <p class="m-0 p-0"><img class="rounded" [src]="char.image?char.image:'../../../assets/images/character-missing.png'" alt=""></p>
-  <div class="d-flex flex-column text-block p-0 text-center justify-content-between">
+  <div class="d-flex flex-column text-block w-100 p-0 text-center justify-content-between">
     <div>
       <p class="m-0"><span class="fw-bold"> {{char.name?char.name: 'None'}}</span></p>
       <p class="m-0"><span class="fw-bold">{{printClass(char)}}</span></p>

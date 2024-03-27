@@ -1,0 +1,10 @@
+
+<label class="ms-2 checkbox-container" [for]="spell.name" (touchstart)="descriptionFocus(spell.name,spell.description)" (touchend)="clean()" (dblclick)="description(spell.name,spell.description)">{{spell.name}}
+  <input [id]="spell.name" type="checkbox"
+  (touchstart)="descriptionFocus(spell.name,spell.description)"
+  (touchend)="clean()"
+  (dblclick)="description(spell.name,spell.description)"
+  (click)="action()"
+  [checked]="isChecked(spell.id)">
+  <span class="checkmark"></span>
+</label>
