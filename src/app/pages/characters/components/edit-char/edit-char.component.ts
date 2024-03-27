@@ -83,9 +83,13 @@ export class EditCharComponent {
     else this.char.status=Status.Private
   }
   setClass(){
+    this.cantrips=0;
+    this.numberSpells=0;
+    this.spellsId=[];
+    this.selectedSpells=[];
     this.setHP();
     this.getSpells(this.char.pgClass[0]);
-    this.setNumberSpell()
+    this.setNumberSpell();
   }
   setHP():void{
     switch(this.char.pgClass[0]){
